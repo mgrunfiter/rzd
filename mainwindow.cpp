@@ -62,58 +62,58 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // TODO:
     // Процедура чтения из БД и перерисовки
-//    SELECT a.ID, b.NORTHING_METER as x1, b.EASTING_METER as y1
-//    FROM GEO_LINE a, GEO_POINT b
-//    WHERE a.ID_GEO_POINT_START = b.ID order by a.ID
 
-    GeoLine OneLine;
-
-//    query.prepare("SELECT a.ID, b.NORTHING_METER as x1, b.EASTING_METER as y1 FROM GEO_LINE a, GEO_POINT b WHERE a.ID_GEO_POINT_START = b.ID order by a.ID");
-    query.prepare("SELECT a.ID, b.NORTHING_METER as x1, b.EASTING_METER as y1\
-                  FROM GEO_LINE a, GEO_POINT b\
-                  WHERE a.ID_GEO_POINT_START = b.ID\
-                  union\
-                  SELECT a.ID, b.NORTHING_METER as x2, b.EASTING_METER as y2\
-                  FROM GEO_LINE a, GEO_POINT b\
-                  WHERE a.ID_GEO_POINT_END = b.ID");
-    query.exec();
-    OneLine.id = -1;
-    while (query.next())
+    StationMap map;
     {
-        int id = 0;
-        id = query.value(0).toInt();
-        if (id != OneLine.id)
+        Profiler x("Read GEO_POINTS");
+        query.prepare("select * from GEO_POINT order by ID");
+        query.exec();
+        while (query.next())
         {
-            OneLine.id = id;
-            OneLine.x1 = query.value(1).toDouble();
-            OneLine.y1 =query.value(2).toDouble();
-        }
-        else
-        {
-            OneLine.x2 = query.value(1).toDouble();
-            OneLine.y2 =query.value(2).toDouble();
-            GeoLines.push_back(OneLine);
-            OneLine.id = -1;
+            PointOnMap point;
+            point.id = query.value(0).toInt();
+            point.x = query.value(1).toFloat();
+            point.y =query.value(2).toFloat();
+            map.addPoint(point);
         }
     }
-
-    QVector<double> x(2), y(2); //Массивы координат точек
-
-    ui->widget->clearGraphs();//Если нужно, то очищаем все графики
-    int count = 0;
-    for (auto OneLine: GeoLines)
     {
-        qDebug() << "id = " << OneLine.id << " x1 = " << OneLine.x1 << "y1 = " << OneLine.y1 << " x2 = " << OneLine.x2 << "y2 = " << OneLine.y2;
-        x[0] = OneLine.x1;
-        y[0] = OneLine.y1;
-        x[1] = OneLine.x2;
-        y[1] = OneLine.y2;
-        //Добавляем один график в widget
-        ui->widget->addGraph();
-        //Говорим, что отрисовать нужно график по нашим двум массивам x и y
-        ui->widget->graph(count)->setData(x, y);
-        count++;
+        Profiler x("Read GEO_LINES");
+        query.prepare("select ID, ID_GEO_POINT_START, ID_GEO_POINT_END, LENGHT from GEO_LINE order by ID");
+        query.exec();
+        while (query.next())
+        {
+            Edge OneEdge;
+            OneEdge.id = query.value(0).toInt();
+            OneEdge.start = map.getPoint(query.value(1).toInt());
+            OneEdge.end = map.getPoint(query.value(2).toInt());
+            OneEdge.length = query.value(3).toInt();
+            map.addEdge(OneEdge);
+        }
     }
+    {
+        Profiler x("findParents");
+        map.findParents();
+    }
+    std::cout << std::endl;
+
+//    QVector<double> x(2), y(2); //Массивы координат точек
+
+//    ui->widget->clearGraphs();//Если нужно, то очищаем все графики
+//    int count = 0;
+//    for (auto OneLine: GeoLines)
+//    {
+//        qDebug() << "id = " << OneLine.id << " x1 = " << OneLine.x1 << "y1 = " << OneLine.y1 << " x2 = " << OneLine.x2 << "y2 = " << OneLine.y2;
+//        x[0] = OneLine.x1;
+//        y[0] = OneLine.y1;
+//        x[1] = OneLine.x2;
+//        y[1] = OneLine.y2;
+//        //Добавляем один график в widget
+//        ui->widget->addGraph();
+//        //Говорим, что отрисовать нужно график по нашим двум массивам x и y
+//        ui->widget->graph(count)->setData(x, y);
+//        count++;
+//    }
 
 }
 

@@ -6,7 +6,7 @@
 //#include <QTextCodec>
 
 // Данные для ведения логов
-static QTextStream* logStream;
+//static QTextStream* logStream;
 static QFile* logFile;
 
 void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg);

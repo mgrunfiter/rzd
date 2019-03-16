@@ -29,13 +29,16 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     qcustomplot.cpp \
-    logger.cpp
+    logger.cpp \
+    stationmap.cpp
 
 HEADERS += \
         mainwindow.h \
     qcustomplot.h \
     logger.h \
-    defines.h
+    defines.h \
+    stationmap.h \
+    profiler.h
 
 FORMS += \
         mainwindow.ui
