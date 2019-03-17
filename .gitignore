@@ -1,0 +1,5 @@
+*.exe
+*.user
+*.user*
+Makefile*
+debug/*

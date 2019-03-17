@@ -8,6 +8,7 @@
 #include <QDebug>
 #include <QCloseEvent>
 #include <vector>
+#include <algorithm>
 #include "logger.h"
 #include "defines.h"
 #include "stationmap.h"
@@ -31,6 +32,10 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
+    void Run();
+    bool CheckBase();
+    void GetDateFromBase();
+    void PaintMap();
     QString getFilenameBD();
     ~MainWindow();
 
@@ -49,9 +54,14 @@ private:
     QSqlQuery query;
 //    QString file_name_BD = "rzhd.db";
 //    QString file_name_BD = "D:/_git/cpp/cjunior-2019/final_task/db/rzhd.db";
-//    QString file_name_BD = "/home/csv/study/github/cjunior-2019/final_task/db/rzhd.db";
-    QString file_name_BD = "/home/family/cpp/cjunior-2019/final_task/db/rzhd.db";
-    QString version = "final task v0.1";
+    QString file_name_BD = "/home/csv/study/github/cjunior-2019/final_task/db/rzhd.db";
+//    QString file_name_BD = "*//home/family/cpp/cjunior-2019/final_task/db/rzhd.db";
+//    QString file_name_BD = "D:/_git/cpp/rzd/db/rzhd.db";
+    StationMap map;
+    double max_x = 0;
+    double min_x = 0;
+    double max_y = 0;
+    double min_y = 0;
 };
 
 #endif // MAINWINDOW_H

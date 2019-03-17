@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 //    QTextCodec::setCodecForTr(QTextCodec::codecForName("utf-8"));
     #endif
 
-    logFile = new QFile("final_task.log");
+    logFile = new QFile(LOG_NAME);
     // Открываем файл логирования
     logFile->open(QFile::Append | QFile::Text);
     // Устанавливаем обработчик
