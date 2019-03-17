@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
     this->setPosition(*this, parent);
     this->setWindowTitle(FULL_PROGRAMM_NAME);
 
-    ui->leBaseFile->setText(file_name_BD);
+    ui->leBaseFile->setText(file_name_base);
 
     Run();
 }
@@ -33,7 +33,7 @@ void MainWindow::Run()
     else
     {
         // Читаем из БД
-        GetDateFromBase();
+        GetDataFromBase();
         //Установим область, которая будет показываться на графике
         if ((max_x > EPSILON) || (min_x < EPSILON) || (max_y > EPSILON) || (min_y < EPSILON))
         {
@@ -47,17 +47,18 @@ void MainWindow::Run()
         // Рисуем карту станции
         PaintMap();
     }
+    ui->widget->replot();
 }
 
 bool MainWindow::CheckBase()
 {
-    if (! QFile::exists(file_name_BD))
+    if (! QFile::exists(file_name_base))
     {
         QMessageBox::warning(nullptr, PROGRAMM_NAME, "Файл БД не доступен! \n Для продолжения укажите файл БД.");
-        file_name_BD = getFilenameBD();
-        ui->leBaseFile->setText(file_name_BD);
+        file_name_base = GetFileNameBase();
+        ui->leBaseFile->setText(file_name_base);
     }
-    dbs.setDatabaseName(file_name_BD);
+    dbs.setDatabaseName(file_name_base);
     if (! dbs.open())
     {
        qWarning() << "Can't open";
@@ -91,7 +92,7 @@ bool MainWindow::CheckBase()
     return false;
 }
 
-void MainWindow::GetDateFromBase()
+void MainWindow::GetDataFromBase()
 {
     {
     Profiler prfr("Read GEO_POINTS:");
@@ -148,7 +149,7 @@ void MainWindow::PaintMap()
             ui->widget->graph(count)->setData(x, y);
             count++;
         }
-        ui->widget->replot();
+//        ui->widget->replot();
     }
 }
 
@@ -205,7 +206,7 @@ MainWindow::~MainWindow()
     qDebug() << "d-tor MainWindow ";
 }
 
-QString MainWindow::getFilenameBD()
+QString MainWindow::GetFileNameBase()
 {
     QString str = QFileDialog::getOpenFileName(nullptr, "Open Dialog", "", "*.db");
     return str;
@@ -213,9 +214,9 @@ QString MainWindow::getFilenameBD()
 
 void MainWindow::on_tbBaseFile_clicked()
 {
-    file_name_BD = getFilenameBD();
-    dbs.setDatabaseName(file_name_BD);
-    ui->leBaseFile->setText(file_name_BD);
+    file_name_base = GetFileNameBase();
+    dbs.setDatabaseName(file_name_base);
+    ui->leBaseFile->setText(file_name_base);
     map.ClearData();
     ui->widget->clearGraphs();//Если нужно, то очищаем все графики
     ui->widget->replot();

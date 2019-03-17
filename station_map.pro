@@ -9,7 +9,7 @@ QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
-TARGET = final_task
+TARGET = station_map
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use

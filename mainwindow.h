@@ -34,9 +34,9 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     void Run();
     bool CheckBase();
-    void GetDateFromBase();
+    void GetDataFromBase();
     void PaintMap();
-    QString getFilenameBD();
+    QString GetFileNameBase();
     ~MainWindow();
 
 protected:
@@ -47,16 +47,15 @@ private slots:
     void on_tbBaseFile_clicked();
 
 private:
-//    std::vector<GeoLine>GeoLines;
     Ui::MainWindow *ui;
     bool MessBox(QString message);
     QSqlDatabase dbs = QSqlDatabase::addDatabase("QSQLITE");
     QSqlQuery query;
 //    QString file_name_BD = "rzhd.db";
 //    QString file_name_BD = "D:/_git/cpp/cjunior-2019/final_task/db/rzhd.db";
-    QString file_name_BD = "/home/csv/study/github/cjunior-2019/final_task/db/rzhd.db";
+//    QString file_name_BD = "/home/csv/study/github/cjunior-2019/final_task/db/rzhd.db";
 //    QString file_name_BD = "*//home/family/cpp/cjunior-2019/final_task/db/rzhd.db";
-//    QString file_name_BD = "D:/_git/cpp/rzd/db/rzhd.db";
+    QString file_name_base = "D:/_git/cpp/rzd/db/rzhd.db";
     StationMap map;
     double max_x = 0;
     double min_x = 0;

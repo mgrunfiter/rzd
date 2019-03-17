@@ -9,12 +9,6 @@ StationMap::~StationMap()
 {
     qDebug() << "d-tor StationMap ";
     ClearData();
-//    // освобождаем выделенную под объекты память
-//    for(size_t i = 0; i < Edges.size(); ++i)
-//       delete [] Edges[i];
-//    // освобождаем выделенную под объекты память
-//    for(size_t i = 0; i < Points.size(); ++i)
-//       delete [] Points[i];
 }
 
 void StationMap::addOneEdge(Edge *new_edge)
@@ -31,14 +25,12 @@ Edge* StationMap::getOneEdge(const int edge_id)
 void StationMap::addOnePoint(PointOnMap *point)
 {
     Points.push_back(point);
-    //    std::sort(Points.begin(), Points.end(), [](PointOnMap a, PointOnMap b) { return a.id < b.id; });
 }
 
 PointOnMap* StationMap::getOnePoint(const int point_id)
 {
-//    auto points_it = std::find_if(Points.begin(), Points.end(), [&](const PointOnMap& finded_point){return (point_id == finded_point.id);});
-    auto points_it = std::find_if(Points.begin(), Points.end(), [&](PointOnMap* point){return (point_id == point->id);});
-    return *points_it;
+    auto point_it = std::find_if(Points.begin(), Points.end(), [&](PointOnMap* point){return (point_id == point->id);});
+    return *point_it;
 }
 
 void StationMap::findParents()
@@ -53,12 +45,22 @@ void StationMap::findParents()
 
 void StationMap::ClearData()
 {
+    qDebug() << "Edges size = " << Edges.size() << "\tEdges capacity: " << Edges.capacity();
+    qDebug() << "Points size = " << Points.size() << "\tPoints capacity: " << Points.capacity();
     // освобождаем выделенную под объекты память
     for(size_t i = 0; i < Edges.size(); ++i)
        delete [] Edges[i];
     // освобождаем выделенную под объекты память
     for(size_t i = 0; i < Points.size(); ++i)
        delete [] Points[i];
+    qDebug() << "Edges size = " << Edges.size() << "\tEdges capacity: " << Edges.capacity();
+    qDebug() << "Points size = " << Points.size() << "\tPoints capacity: " << Points.capacity();
+    Edges.clear();
+    Points.clear();
+    std::vector<Edge *>().swap(Edges);
+    std::vector<PointOnMap *>().swap(Points);
+    qDebug() << "Edges size = " << Edges.size() << "\tEdges capacity: " << Edges.capacity();
+    qDebug() << "Points size = " << Points.size() << "\tPoints capacity: " << Points.capacity();
 }
 
 std::vector<Edge *> StationMap::getEdges()

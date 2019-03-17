@@ -1,0 +1,115 @@
+2019-03-17 22:06:02.132 INF default: Programm starting
+2019-03-17 22:06:03.277 INF default: 16 "Found next tables: RAILWAY_OBJ_TYPE sqlite_sequence VERSION STAGE_CIRCUIT_TYPE RAILWAY_OBJ_SIGNAL_TYPE RAILWAY_OBJ RAILWAY_OBJ_SECTION RAILWAY_OBJ_SECTION_OBJECTS RAILWAY_OBJ_CIRCUIT GEO_LINE_ADDITIONAL_POINTS GEO_LINE RAILWAY_OBJ_SINGLE_SWITCH RAILWAY_OBJ_JOINT RAILWAY_OBJ_DEADEND RAILWAY_OBJ_SIGNAL GEO_POINT "
+2019-03-17 22:06:07.896 DBG default: onSelectionChange () 0
+2019-03-17 22:06:13.119 DBG default: onSelectionChange (QUrl("file:///D:/_git/cpp/rzd/db")) 1
+2019-03-17 22:06:13.402 DBG default: onSelectionChange () 0
+2019-03-17 22:06:14.615 DBG default: onSelectionChange (QUrl("file:///D:/_git/cpp/rzd/db/false.db")) 1
+2019-03-17 22:07:28.491 CRT default: corrupt or invalid sqlite file
+2019-03-17 22:07:38.631 DBG default: onSelectionChange () 0
+2019-03-17 22:07:39.704 DBG default: onSelectionChange (QUrl("file:///D:/_git/cpp/rzd/db/rzhd.db")) 1
+2019-03-17 22:08:48.442 INF default: Programm starting
+2019-03-17 22:08:55.804 INF default: 16 "Found next tables: RAILWAY_OBJ_TYPE sqlite_sequence VERSION STAGE_CIRCUIT_TYPE RAILWAY_OBJ_SIGNAL_TYPE RAILWAY_OBJ RAILWAY_OBJ_SECTION RAILWAY_OBJ_SECTION_OBJECTS RAILWAY_OBJ_CIRCUIT GEO_LINE_ADDITIONAL_POINTS GEO_LINE RAILWAY_OBJ_SINGLE_SWITCH RAILWAY_OBJ_JOINT RAILWAY_OBJ_DEADEND RAILWAY_OBJ_SIGNAL GEO_POINT "
+2019-03-17 22:09:04.603 DBG default: onSelectionChange () 0
+2019-03-17 22:09:05.749 DBG default: onSelectionChange (QUrl("file:///D:/_git/cpp/rzd/db")) 1
+2019-03-17 22:09:06.114 DBG default: onSelectionChange () 0
+2019-03-17 22:09:07.890 DBG default: onSelectionChange (QUrl("file:///D:/_git/cpp/rzd/db")) 1
+2019-03-17 22:09:09.437 DBG default: onSelectionChange (QUrl("file:///D:/_git/cpp/rzd")) 1
+2019-03-17 22:09:11.540 DBG default: onSelectionChange (QUrl("file:///D:/_git/cpp/cjunior-2019")) 1
+2019-03-17 22:09:11.943 DBG default: onSelectionChange () 0
+2019-03-17 22:09:12.930 DBG default: onSelectionChange (QUrl("file:///D:/_git/cpp/cjunior-2019/final_task")) 1
+2019-03-17 22:09:13.273 DBG default: onSelectionChange () 0
+2019-03-17 22:09:14.089 DBG default: onSelectionChange (QUrl("file:///D:/_git/cpp/cjunior-2019/final_task/debug")) 1
+2019-03-17 22:09:15.765 DBG default: onSelectionChange (QUrl("file:///D:/_git/cpp/cjunior-2019/final_task/debug")) 1
+2019-03-17 22:09:16.193 DBG default: onSelectionChange (QUrl("file:///D:/_git/cpp/cjunior-2019/final_task/db")) 1
+2019-03-17 22:09:16.512 DBG default: onSelectionChange () 0
+2019-03-17 22:09:17.106 DBG default: onSelectionChange (QUrl("file:///D:/_git/cpp/cjunior-2019/final_task/db/rzhd.db")) 1
+2019-03-17 22:10:41.241 INF default: 16 "Found next tables: RAILWAY_OBJ_TYPE sqlite_sequence VERSION STAGE_CIRCUIT_TYPE RAILWAY_OBJ_SIGNAL_TYPE RAILWAY_OBJ RAILWAY_OBJ_SECTION RAILWAY_OBJ_SECTION_OBJECTS RAILWAY_OBJ_CIRCUIT GEO_LINE_ADDITIONAL_POINTS GEO_LINE RAILWAY_OBJ_SINGLE_SWITCH RAILWAY_OBJ_JOINT RAILWAY_OBJ_DEADEND RAILWAY_OBJ_SIGNAL GEO_POINT "
+2019-03-17 22:14:37.567 INF default: Programm starting
+2019-03-17 22:14:38.194 INF default: 16 "Found next tables: RAILWAY_OBJ_TYPE sqlite_sequence VERSION STAGE_CIRCUIT_TYPE RAILWAY_OBJ_SIGNAL_TYPE RAILWAY_OBJ RAILWAY_OBJ_SECTION RAILWAY_OBJ_SECTION_OBJECTS RAILWAY_OBJ_CIRCUIT GEO_LINE_ADDITIONAL_POINTS GEO_LINE RAILWAY_OBJ_SINGLE_SWITCH RAILWAY_OBJ_JOINT RAILWAY_OBJ_DEADEND RAILWAY_OBJ_SIGNAL GEO_POINT "
+2019-03-17 22:15:09.987 DBG default: onSelectionChange () 0
+2019-03-17 22:15:15.538 DBG default: onSelectionChange (QUrl("file:///D:/_git/cpp/rzd")) 1
+2019-03-17 22:15:21.105 DBG default: onSelectionChange (QUrl("file:///D:/_git/cpp/cjunior-2019")) 1
+2019-03-17 22:15:21.503 DBG default: onSelectionChange () 0
+2019-03-17 22:15:22.617 DBG default: onSelectionChange (QUrl("file:///D:/_git/cpp/cjunior-2019/final_task")) 1
+2019-03-17 22:15:23.004 DBG default: onSelectionChange () 0
+2019-03-17 22:15:23.611 DBG default: onSelectionChange (QUrl("file:///D:/_git/cpp/cjunior-2019/final_task/db")) 1
+2019-03-17 22:15:24.151 DBG default: onSelectionChange () 0
+2019-03-17 22:15:24.625 DBG default: onSelectionChange (QUrl("file:///D:/_git/cpp/cjunior-2019/final_task/db/rzhd.db")) 1
+2019-03-17 22:21:02.066 INF default: Programm starting
+2019-03-17 22:21:02.696 INF default: 16 "Found next tables: RAILWAY_OBJ_TYPE sqlite_sequence VERSION STAGE_CIRCUIT_TYPE RAILWAY_OBJ_SIGNAL_TYPE RAILWAY_OBJ RAILWAY_OBJ_SECTION RAILWAY_OBJ_SECTION_OBJECTS RAILWAY_OBJ_CIRCUIT GEO_LINE_ADDITIONAL_POINTS GEO_LINE RAILWAY_OBJ_SINGLE_SWITCH RAILWAY_OBJ_JOINT RAILWAY_OBJ_DEADEND RAILWAY_OBJ_SIGNAL GEO_POINT "
+2019-03-17 22:21:11.381 DBG default: onSelectionChange () 0
+2019-03-17 22:21:13.367 DBG default: onSelectionChange (QUrl("file:///D:/_git/cpp")) 1
+2019-03-17 22:21:15.154 DBG default: onSelectionChange (QUrl("file:///D:/_git/cpp")) 1
+2019-03-17 22:21:15.366 DBG default: onSelectionChange () 0
+2019-03-17 22:21:17.665 DBG default: onSelectionChange (QUrl("file:///D:/_git/cpp/cjunior-2019")) 1
+2019-03-17 22:21:18.108 DBG default: onSelectionChange () 0
+2019-03-17 22:21:19.121 DBG default: onSelectionChange (QUrl("file:///D:/_git/cpp/cjunior-2019/final_task")) 1
+2019-03-17 22:21:19.464 DBG default: onSelectionChange () 0
+2019-03-17 22:21:20.395 DBG default: onSelectionChange (QUrl("file:///D:/_git/cpp/cjunior-2019/final_task/db")) 1
+2019-03-17 22:21:20.758 DBG default: onSelectionChange () 0
+2019-03-17 22:21:21.409 DBG default: onSelectionChange (QUrl("file:///D:/_git/cpp/cjunior-2019/final_task/db/rzhd.db")) 1
+2019-03-17 22:24:00.015 INF default: 16 "Found next tables: RAILWAY_OBJ_TYPE sqlite_sequence VERSION STAGE_CIRCUIT_TYPE RAILWAY_OBJ_SIGNAL_TYPE RAILWAY_OBJ RAILWAY_OBJ_SECTION RAILWAY_OBJ_SECTION_OBJECTS RAILWAY_OBJ_CIRCUIT GEO_LINE_ADDITIONAL_POINTS GEO_LINE RAILWAY_OBJ_SINGLE_SWITCH RAILWAY_OBJ_JOINT RAILWAY_OBJ_DEADEND RAILWAY_OBJ_SIGNAL GEO_POINT "
+2019-03-17 22:24:10.280 INF default: Programm closed
+2019-03-17 22:24:10.287 DBG default: d-tor MainWindow 
+2019-03-17 22:24:10.287 DBG default: d-tor StationMap 
+2019-03-17 22:24:47.895 INF default: Programm starting
+2019-03-17 22:24:48.210 INF default: 16 "Found next tables: RAILWAY_OBJ_TYPE sqlite_sequence VERSION STAGE_CIRCUIT_TYPE RAILWAY_OBJ_SIGNAL_TYPE RAILWAY_OBJ RAILWAY_OBJ_SECTION RAILWAY_OBJ_SECTION_OBJECTS RAILWAY_OBJ_CIRCUIT GEO_LINE_ADDITIONAL_POINTS GEO_LINE RAILWAY_OBJ_SINGLE_SWITCH RAILWAY_OBJ_JOINT RAILWAY_OBJ_DEADEND RAILWAY_OBJ_SIGNAL GEO_POINT "
+2019-03-17 22:24:53.883 DBG default: onSelectionChange () 0
+2019-03-17 22:24:55.935 DBG default: onSelectionChange (QUrl("file:///D:/_git/cpp/rzd/release")) 1
+2019-03-17 22:24:57.246 DBG default: onSelectionChange (QUrl("file:///D:/_git/cpp/rzd/release")) 1
+2019-03-17 22:24:57.776 DBG default: onSelectionChange (QUrl("file:///D:/_git/cpp/rzd/db")) 1
+2019-03-17 22:24:58.011 DBG default: onSelectionChange () 0
+2019-03-17 22:24:58.880 DBG default: onSelectionChange (QUrl("file:///D:/_git/cpp/rzd/db/false.db")) 1
+2019-03-17 22:26:11.926 CRT default: corrupt or invalid sqlite file
+2019-03-17 22:26:36.756 INF default: Programm closed
+2019-03-17 22:26:36.757 DBG default: d-tor MainWindow 
+2019-03-17 22:26:36.757 DBG default: d-tor StationMap 
+2019-03-17 22:30:10.973 INF default: Programm starting
+2019-03-17 22:30:11.308 INF default: 16 "Found next tables: RAILWAY_OBJ_TYPE sqlite_sequence VERSION STAGE_CIRCUIT_TYPE RAILWAY_OBJ_SIGNAL_TYPE RAILWAY_OBJ RAILWAY_OBJ_SECTION RAILWAY_OBJ_SECTION_OBJECTS RAILWAY_OBJ_CIRCUIT GEO_LINE_ADDITIONAL_POINTS GEO_LINE RAILWAY_OBJ_SINGLE_SWITCH RAILWAY_OBJ_JOINT RAILWAY_OBJ_DEADEND RAILWAY_OBJ_SIGNAL GEO_POINT "
+2019-03-17 22:30:15.116 DBG default: onSelectionChange () 0
+2019-03-17 22:30:15.960 DBG default: onSelectionChange (QUrl("file:///D:/_git/cpp/rzd/db")) 1
+2019-03-17 22:30:16.206 DBG default: onSelectionChange () 0
+2019-03-17 22:30:16.872 DBG default: onSelectionChange (QUrl("file:///D:/_git/cpp/rzd/db/false.db")) 1
+2019-03-17 22:30:17.122 DBG default: Edges size =  1364 	Edges capacity:  2048
+2019-03-17 22:30:17.122 DBG default: Points size =  19139 	Points capacity:  32768
+2019-03-17 22:30:17.124 DBG default: Edges size =  1364 	Edges capacity:  2048
+2019-03-17 22:30:17.124 DBG default: Points size =  19139 	Points capacity:  32768
+2019-03-17 22:30:17.124 DBG default: Edges size =  0 	Edges capacity:  0
+2019-03-17 22:30:17.124 DBG default: Points size =  0 	Points capacity:  0
+2019-03-17 22:31:27.801 CRT default: corrupt or invalid sqlite file
+2019-03-17 22:31:41.293 DBG default: onSelectionChange () 0
+2019-03-17 22:31:42.072 DBG default: onSelectionChange (QUrl("file:///D:/_git/cpp/rzd/db/rzhd.db")) 1
+2019-03-17 22:31:42.326 DBG default: Edges size =  0 	Edges capacity:  0
+2019-03-17 22:31:42.326 DBG default: Points size =  0 	Points capacity:  0
+2019-03-17 22:31:42.326 DBG default: Edges size =  0 	Edges capacity:  0
+2019-03-17 22:31:42.326 DBG default: Points size =  0 	Points capacity:  0
+2019-03-17 22:31:42.326 DBG default: Edges size =  0 	Edges capacity:  0
+2019-03-17 22:31:42.326 DBG default: Points size =  0 	Points capacity:  0
+2019-03-17 22:31:42.329 INF default: 16 "Found next tables: RAILWAY_OBJ_TYPE sqlite_sequence VERSION STAGE_CIRCUIT_TYPE RAILWAY_OBJ_SIGNAL_TYPE RAILWAY_OBJ RAILWAY_OBJ_SECTION RAILWAY_OBJ_SECTION_OBJECTS RAILWAY_OBJ_CIRCUIT GEO_LINE_ADDITIONAL_POINTS GEO_LINE RAILWAY_OBJ_SINGLE_SWITCH RAILWAY_OBJ_JOINT RAILWAY_OBJ_DEADEND RAILWAY_OBJ_SIGNAL GEO_POINT "
+2019-03-17 22:31:57.340 DBG default: onSelectionChange () 0
+2019-03-17 22:31:59.334 DBG default: onSelectionChange (QUrl("file:///D:/_git/cpp/rzd")) 1
+2019-03-17 22:32:01.927 DBG default: onSelectionChange (QUrl("file:///D:/_git/cpp/cjunior-2019")) 1
+2019-03-17 22:32:02.177 DBG default: onSelectionChange () 0
+2019-03-17 22:32:03.784 DBG default: onSelectionChange (QUrl("file:///D:/_git/cpp/cjunior-2019/db")) 1
+2019-03-17 22:32:05.387 DBG default: onSelectionChange (QUrl("file:///D:/_git/cpp/cjunior-2019/db")) 1
+2019-03-17 22:32:06.520 DBG default: onSelectionChange (QUrl("file:///D:/_git/cpp/cjunior-2019/final_task")) 1
+2019-03-17 22:32:06.791 DBG default: onSelectionChange () 0
+2019-03-17 22:32:07.440 DBG default: onSelectionChange (QUrl("file:///D:/_git/cpp/cjunior-2019/final_task/db")) 1
+2019-03-17 22:32:07.722 DBG default: onSelectionChange () 0
+2019-03-17 22:32:08.184 DBG default: onSelectionChange (QUrl("file:///D:/_git/cpp/cjunior-2019/final_task/db/rzhd.db")) 1
+2019-03-17 22:32:08.434 DBG default: Edges size =  1364 	Edges capacity:  2048
+2019-03-17 22:32:08.436 DBG default: Points size =  19139 	Points capacity:  32768
+2019-03-17 22:32:08.439 DBG default: Edges size =  1364 	Edges capacity:  2048
+2019-03-17 22:32:08.439 DBG default: Points size =  19139 	Points capacity:  32768
+2019-03-17 22:32:08.439 DBG default: Edges size =  0 	Edges capacity:  0
+2019-03-17 22:32:08.439 DBG default: Points size =  0 	Points capacity:  0
+2019-03-17 22:33:19.083 INF default: 16 "Found next tables: RAILWAY_OBJ_TYPE sqlite_sequence VERSION STAGE_CIRCUIT_TYPE RAILWAY_OBJ_SIGNAL_TYPE RAILWAY_OBJ RAILWAY_OBJ_SECTION RAILWAY_OBJ_SECTION_OBJECTS RAILWAY_OBJ_CIRCUIT GEO_LINE_ADDITIONAL_POINTS GEO_LINE RAILWAY_OBJ_SINGLE_SWITCH RAILWAY_OBJ_JOINT RAILWAY_OBJ_DEADEND RAILWAY_OBJ_SIGNAL GEO_POINT "
+2019-03-17 22:33:55.433 INF default: Programm closed
+2019-03-17 22:33:55.435 DBG default: d-tor MainWindow 
+2019-03-17 22:33:55.435 DBG default: d-tor StationMap 
+2019-03-17 22:33:55.435 DBG default: Edges size =  1364 	Edges capacity:  2048
+2019-03-17 22:33:55.435 DBG default: Points size =  19139 	Points capacity:  32768
+2019-03-17 22:33:55.437 DBG default: Edges size =  1364 	Edges capacity:  2048
+2019-03-17 22:33:55.437 DBG default: Points size =  19139 	Points capacity:  32768
+2019-03-17 22:33:55.437 DBG default: Edges size =  0 	Edges capacity:  0
+2019-03-17 22:33:55.437 DBG default: Points size =  0 	Points capacity:  0
