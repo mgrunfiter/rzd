@@ -17,8 +17,11 @@ MainWindow::MainWindow(QWidget *parent) :
     this->setWindowTitle(FULL_PROGRAMM_NAME);
 
     ui->leBaseFile->setText(file_name_base);
-
-    Run();
+    ui->lbFrom->setEnabled(false);
+    ui->lbTo->setEnabled(false);
+    ui->cbFrom->setEnabled(false);
+    ui->cbTo->setEnabled(false);
+    Run();            
 }
 
 void MainWindow::Run()
@@ -46,6 +49,28 @@ void MainWindow::Run()
         }
         // Рисуем карту станции
         PaintMap();
+    }
+    if (map.EdgesEmpty())
+    {
+        ui->lbFrom->setEnabled(false);
+        ui->lbTo->setEnabled(false);
+        ui->cbFrom->setEnabled(false);
+        ui->cbTo->setEnabled(false);
+        ui->pbFindRoute->setEnabled(false);
+        ui->cbFrom->clear();
+        ui->cbTo->clear();
+    }
+    else {
+        for (auto OnePoint: map.getPoints())
+        {
+            ui->cbFrom->addItem(QString::number(OnePoint->id));
+            ui->cbTo->addItem(QString::number(OnePoint->id));
+        }
+        ui->lbFrom->setEnabled(true);
+        ui->lbTo->setEnabled(true);
+        ui->cbFrom->setEnabled(true);
+        ui->cbTo->setEnabled(true);
+        ui->pbFindRoute->setEnabled(true);
     }
     ui->widget->replot();
 }
@@ -137,7 +162,7 @@ void MainWindow::PaintMap()
         Profiler prfr("Paints station map");
         QVector<double> x(2), y(2);
         ui->widget->clearGraphs();//Если нужно, то очищаем все графики
-        ui->widget->replot();
+//        ui->widget->replot();
         int count = 0;
         for (auto OneEdge: map.getEdges())
         {
@@ -149,7 +174,7 @@ void MainWindow::PaintMap()
             ui->widget->graph(count)->setData(x, y);
             count++;
         }
-//        ui->widget->replot();
+        ui->widget->replot();
     }
 }
 
@@ -215,10 +240,19 @@ QString MainWindow::GetFileNameBase()
 void MainWindow::on_tbBaseFile_clicked()
 {
     file_name_base = GetFileNameBase();
+    if (dbs.isOpen())
+        dbs.close();
     dbs.setDatabaseName(file_name_base);
     ui->leBaseFile->setText(file_name_base);
     map.ClearData();
+//    ui->widget->close();
+//    ui->setupUi(this);
+//    ui->widget->clearPlottables();
+//    int count = ui->widget->itemCount();
+//    for (int i = 0; i < count; i++)
+//        ui->widget->removeItem(i);
     ui->widget->clearGraphs();//Если нужно, то очищаем все графики
-    ui->widget->replot();
+//    ui->widget->replot();
+//    ui->widget->clearGraphs();
     Run();
 }

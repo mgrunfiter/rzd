@@ -33,6 +33,11 @@ PointOnMap* StationMap::getOnePoint(const int point_id)
     return *point_it;
 }
 
+bool StationMap::EdgesEmpty()
+{
+    return Edges.empty();
+}
+
 void StationMap::findParents()
 {
 // TODO: ?
@@ -45,6 +50,7 @@ void StationMap::findParents()
 
 void StationMap::ClearData()
 {
+    qDebug() << "Clear data";
     qDebug() << "Edges size = " << Edges.size() << "\tEdges capacity: " << Edges.capacity();
     qDebug() << "Points size = " << Points.size() << "\tPoints capacity: " << Points.capacity();
     // освобождаем выделенную под объекты память
@@ -66,4 +72,9 @@ void StationMap::ClearData()
 std::vector<Edge *> StationMap::getEdges()
 {
     return Edges;
+}
+
+std::vector<PointOnMap *> StationMap::getPoints()
+{
+    return Points;
 }

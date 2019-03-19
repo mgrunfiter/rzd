@@ -37,11 +37,12 @@ public:
     Edge getChildEdge(int edge_id);
     void addOnePoint(PointOnMap *point);
     PointOnMap *getOnePoint(const int point_id);
+    bool EdgesEmpty();
     void findParents();
     void ClearData();
 
     std::vector<Edge *> getEdges();
-
+    std::vector<PointOnMap *> getPoints();
 
 private:
     std::vector<PointOnMap *> Points;

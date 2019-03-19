@@ -14,14 +14,6 @@
 #include "stationmap.h"
 #include "profiler.h"
 
-struct GeoLine {
-    int id;
-    double x1;
-    double y1;
-    double x2;
-    double y2;
-};
-
 namespace Ui {
 class MainWindow;
 }
@@ -51,11 +43,11 @@ private:
     bool MessBox(QString message);
     QSqlDatabase dbs = QSqlDatabase::addDatabase("QSQLITE");
     QSqlQuery query;
-//    QString file_name_BD = "rzhd.db";
-//    QString file_name_BD = "D:/_git/cpp/cjunior-2019/final_task/db/rzhd.db";
-//    QString file_name_BD = "/home/csv/study/github/cjunior-2019/final_task/db/rzhd.db";
-//    QString file_name_BD = "*//home/family/cpp/cjunior-2019/final_task/db/rzhd.db";
-    QString file_name_base = "D:/_git/cpp/rzd/db/rzhd.db";
+//    QString file_name_base = "rzhd.db";
+//    QString file_name_base = "D:/_git/cpp/cjunior-2019/final_task/db/rzhd.db";
+    QString file_name_base = "/home/csv/study/github/rzd/db/rzhd.db";
+//    QString file_name_base = "*//home/family/cpp/cjunior-2019/final_task/db/rzhd.db";
+//    QString file_name_base = "D:/_git/cpp/rzd/db/rzhd.db";
     StationMap map;
     double max_x = 0;
     double min_x = 0;

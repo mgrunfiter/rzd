@@ -1,5 +1,7 @@
+*.o
 *.exe
 *.user
 *.user*
 Makefile*
+.qmake.stash
 debug/*
