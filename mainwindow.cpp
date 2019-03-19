@@ -71,6 +71,7 @@ void MainWindow::Run()
         ui->cbFrom->setEnabled(true);
         ui->cbTo->setEnabled(true);
         ui->pbFindRoute->setEnabled(true);
+        ui->widget->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
     }
     ui->widget->replot();
 }
@@ -93,8 +94,8 @@ bool MainWindow::CheckBase()
     {
         query.prepare("SELECT name, sql FROM sqlite_master WHERE type='table'");
         query.exec();
-        int countRows = 0;
         query.last();
+        int countRows = 0;
         countRows = query.at() + 1;
         if (countRows <= 0)
         {

@@ -4,4 +4,6 @@
 *.user*
 Makefile*
 .qmake.stash
+*.log
+*.o
 debug/*
