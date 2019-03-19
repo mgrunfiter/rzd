@@ -242,7 +242,10 @@ void MainWindow::on_tbBaseFile_clicked()
 {
     file_name_base = GetFileNameBase();
     if (dbs.isOpen())
+    {
         dbs.close();
+        dbs.removeDatabase(QSqlDatabase::defaultConnection);
+    }
     dbs.setDatabaseName(file_name_base);
     ui->leBaseFile->setText(file_name_base);
     map.ClearData();
