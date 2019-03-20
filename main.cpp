@@ -1,9 +1,5 @@
 #include "mainwindow.h"
-//#include <QtWidgets>
-//#include <QApplication>
-//#include <QFile>
-//#include <QDate>
-//#include <QTextCodec>
+
 
 // Данные для ведения логов
 //static QTextStream* logStream;
@@ -21,7 +17,6 @@ int main(int argc, char *argv[])
     // Под остальными ОС - utf8
     #else
      QTextCodec::setCodecForLocale(QTextCodec::codecForName("utf-8"));
-//    QTextCodec::setCodecForTr(QTextCodec::codecForName("utf-8"));
     #endif
 
     logFile = new QFile(LOG_NAME);

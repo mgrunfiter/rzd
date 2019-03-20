@@ -47,8 +47,6 @@ void MainWindow::Run()
             ui->widget->xAxis->setRange(MIN_X, MAX_X);
             ui->widget->yAxis->setRange(MIN_Y, MAX_Y);
         }
-        // Рисуем карту станции
-        PaintMap();
     }
     if (map.EdgesEmpty())
     {
@@ -73,7 +71,8 @@ void MainWindow::Run()
         ui->pbFindRoute->setEnabled(true);
         ui->widget->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
     }
-    ui->widget->replot();
+    // Рисуем карту станции
+    PaintMap();
 }
 
 bool MainWindow::CheckBase()
@@ -87,8 +86,7 @@ bool MainWindow::CheckBase()
     dbs.setDatabaseName(file_name_base);
     if (! dbs.open())
     {
-       qWarning() << "Can't open";
-//       QMessageBox::warning(nullptr, PROGRAMM_NAME, "Соединение с БД не установлено!");
+       qWarning() << "Соединение с БД не установлено!";
     }
     else
     {
@@ -99,8 +97,7 @@ bool MainWindow::CheckBase()
         countRows = query.at() + 1;
         if (countRows <= 0)
         {
-           qCritical() << "corrupt or invalid sqlite file";
-//           QMessageBox::critical(nullptr, PROGRAMM_NAME, "Файл БД поврежден или или недействителен!");
+           qCritical() << "Файл БД поврежден или или недействителен!";
         }
         else
         {
@@ -162,8 +159,21 @@ void MainWindow::PaintMap()
     {
         Profiler prfr("Paints station map");
         QVector<double> x(2), y(2);
+
+//    медленно, сделать в отдельном потоке с прогрессбаром
+//        QDialog *progress = new Progress(this);
+//        QDialog *progress = new QDialog(this);
+        QWidget *progress = new QWidget(this, Qt::Dialog);
+        progress->setWindowModality(Qt::WindowModal);
+//        progress->setModal(true);
+//        progress->setAttribute(Qt::WA_DeleteOnClose);
+        progress->show();
+//        progress->setVisible(true);
         ui->widget->clearGraphs();//Если нужно, то очищаем все графики
-//        ui->widget->replot();
+        progress->close();
+//        progress->deleteLater();
+
+        ui->widget->replot();
         int count = 0;
         for (auto OneEdge: map.getEdges())
         {
@@ -240,23 +250,12 @@ QString MainWindow::GetFileNameBase()
 
 void MainWindow::on_tbBaseFile_clicked()
 {
-    file_name_base = GetFileNameBase();
     if (dbs.isOpen())
     {
         dbs.close();
-        dbs.removeDatabase(QSqlDatabase::defaultConnection);
     }
-    dbs.setDatabaseName(file_name_base);
-    ui->leBaseFile->setText(file_name_base);
     map.ClearData();
-//    ui->widget->close();
-//    ui->setupUi(this);
-//    ui->widget->clearPlottables();
-//    int count = ui->widget->itemCount();
-//    for (int i = 0; i < count; i++)
-//        ui->widget->removeItem(i);
-    ui->widget->clearGraphs();//Если нужно, то очищаем все графики
-//    ui->widget->replot();
-//    ui->widget->clearGraphs();
+    file_name_base = GetFileNameBase();
+    ui->leBaseFile->setText(file_name_base);
     Run();
 }

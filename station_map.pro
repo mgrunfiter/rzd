@@ -30,7 +30,8 @@ SOURCES += \
         mainwindow.cpp \
     qcustomplot.cpp \
     logger.cpp \
-    stationmap.cpp
+    stationmap.cpp \
+    progress.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -38,10 +39,12 @@ HEADERS += \
     logger.h \
     defines.h \
     stationmap.h \
-    profiler.h
+    profiler.h \
+    progress.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    dialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

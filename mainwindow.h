@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QtSql>
 #include <QtWidgets>
+#include <QDialog>
 #include <iostream>
 #include <QDebug>
 #include <QCloseEvent>
@@ -13,6 +14,8 @@
 #include "defines.h"
 #include "stationmap.h"
 #include "profiler.h"
+//#include "ui_dialog.h"
+#include "progress.h"
 
 namespace Ui {
 class MainWindow;
