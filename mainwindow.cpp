@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->lbTo->setEnabled(false);
     ui->cbFrom->setEnabled(false);
     ui->cbTo->setEnabled(false);
-    Run();            
+    Run();
 }
 
 void MainWindow::Run()
@@ -157,9 +157,12 @@ void MainWindow::PaintMap()
         for (int i = GraphicsCount - 1; i >= 0; i--)
         {
             ui->widget->removePlottable(i);
-            pprd->setValue(GraphicsCount - i);
-            ui->widget->replot();
-            QCoreApplication::processEvents();
+            if ((i % 10) == 0)
+            {
+                pprd->setValue(GraphicsCount - i);
+                ui->widget->replot();
+                QCoreApplication::processEvents();
+            }
         }
         ui->widget->clearGraphs();
         pprd->setValue(GraphicsCount);
@@ -245,7 +248,7 @@ MainWindow::~MainWindow()
 
 QString MainWindow::GetFileNameBase()
 {
-    QString str = QFileDialog::getOpenFileName(nullptr, "Open Dialog", "", "*.db");
+    QString str = QFileDialog::getOpenFileName(nullptr, "Выберите файл БД:", "ывпиыи", "*.db");
     return str;
 }
 
@@ -258,5 +261,16 @@ void MainWindow::on_tbBaseFile_clicked()
     map.ClearData();
     file_name_base = GetFileNameBase();
     ui->leBaseFile->setText(file_name_base);
+    Run();
+}
+
+void MainWindow::on_leBaseFile_returnPressed()
+{
+    if (dbs.isOpen())
+    {
+        dbs.close();
+    }
+    map.ClearData();
+    file_name_base = ui->leBaseFile->text();
     Run();
 }

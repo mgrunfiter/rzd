@@ -41,6 +41,8 @@ protected:
 private slots:
     void on_tbBaseFile_clicked();
 
+    void on_leBaseFile_returnPressed();
+
 private:
     Ui::MainWindow *ui;
     bool MessBox(QString message);
