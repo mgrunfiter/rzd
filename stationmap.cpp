@@ -38,6 +38,11 @@ bool StationMap::EdgesEmpty()
     return Edges.empty();
 }
 
+int StationMap::CountEdges()
+{
+    return Edges.size();
+}
+
 void StationMap::findParents()
 {
 // TODO: ?

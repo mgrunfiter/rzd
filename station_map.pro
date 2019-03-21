@@ -37,14 +37,13 @@ HEADERS += \
         mainwindow.h \
     qcustomplot.h \
     logger.h \
-    defines.h \
     stationmap.h \
     profiler.h \
-    progress.h
+    progress.h \
+    defines.h
 
 FORMS += \
-        mainwindow.ui \
-    dialog.ui
+        mainwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

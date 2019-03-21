@@ -29,25 +29,15 @@ void MainWindow::Run()
     // Подключаемся к базе
     if (! CheckBase())
     {
-        QMessageBox::warning(nullptr,"Warning", "Подключение к БД не удалось, выберите файл БД вручную");
-        ui->widget->xAxis->setRange(MIN_X, MAX_X);
-        ui->widget->yAxis->setRange(MIN_Y, MAX_Y);
+        QMessageBox::warning(nullptr, "Warning", "Подключение к БД не удалось, выберите файл БД вручную");
     }
     else
     {
         // Читаем из БД
         GetDataFromBase();
-        //Установим область, которая будет показываться на графике
-        if ((max_x > EPSILON) || (min_x < EPSILON) || (max_y > EPSILON) || (min_y < EPSILON))
-        {
-            ui->widget->xAxis->setRange(min_x - 10, max_x + 10);//Для оси Ox
-            ui->widget->yAxis->setRange(min_y - 10, max_y + 10);//Для оси Oy
-        }
-        else {
-            ui->widget->xAxis->setRange(MIN_X, MAX_X);
-            ui->widget->yAxis->setRange(MIN_Y, MAX_Y);
-        }
     }
+    // Рисуем карту станции
+    PaintMap();
     if (map.EdgesEmpty())
     {
         ui->lbFrom->setEnabled(false);
@@ -71,8 +61,6 @@ void MainWindow::Run()
         ui->pbFindRoute->setEnabled(true);
         ui->widget->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
     }
-    // Рисуем карту станции
-    PaintMap();
 }
 
 bool MainWindow::CheckBase()
@@ -86,7 +74,7 @@ bool MainWindow::CheckBase()
     dbs.setDatabaseName(file_name_base);
     if (! dbs.open())
     {
-       qWarning() << "Соединение с БД не установлено!";
+       qWarning() << "No database connection!";
     }
     else
     {
@@ -97,7 +85,7 @@ bool MainWindow::CheckBase()
         countRows = query.at() + 1;
         if (countRows <= 0)
         {
-           qCritical() << "Файл БД поврежден или или недействителен!";
+           qCritical() << "Database file is damaged or invalid!";
         }
         else
         {
@@ -160,19 +148,32 @@ void MainWindow::PaintMap()
         Profiler prfr("Paints station map");
         QVector<double> x(2), y(2);
 
-//    медленно, сделать в отдельном потоке с прогрессбаром
-//        QDialog *progress = new Progress(this);
-//        QDialog *progress = new QDialog(this);
-        QWidget *progress = new QWidget(this, Qt::Dialog);
-        progress->setWindowModality(Qt::WindowModal);
-//        progress->setModal(true);
-//        progress->setAttribute(Qt::WA_DeleteOnClose);
-        progress->show();
-//        progress->setVisible(true);
-        ui->widget->clearGraphs();//Если нужно, то очищаем все графики
-        progress->close();
-//        progress->deleteLater();
-
+        int GraphicsCount = ui->widget->plottableCount();
+        QProgressDialog *pprd = new QProgressDialog("Очистка графика...", "&Отмена", 0, GraphicsCount);
+        pprd->setMinimumDuration(0);
+        pprd->setCancelButton(nullptr);
+        pprd->setWindowTitle("Ждите");
+        pprd->setModal(true);
+        for (int i = GraphicsCount - 1; i >= 0; i--)
+        {
+            ui->widget->removePlottable(i);
+            pprd->setValue(GraphicsCount - i);
+            ui->widget->replot();
+            QCoreApplication::processEvents();
+        }
+        ui->widget->clearGraphs();
+        pprd->setValue(GraphicsCount);
+        delete pprd;
+        //Установим область, которая будет показываться на графике
+        if ((max_x > EPSILON) || (min_x < EPSILON) || (max_y > EPSILON) || (min_y < EPSILON))
+        {
+            ui->widget->xAxis->setRange(min_x - 10, max_x + 10);//Для оси Ox
+            ui->widget->yAxis->setRange(min_y - 10, max_y + 10);//Для оси Oy
+        }
+        else {
+            ui->widget->xAxis->setRange(MIN_X, MAX_X);
+            ui->widget->yAxis->setRange(MIN_Y, MAX_Y);
+        }
         ui->widget->replot();
         int count = 0;
         for (auto OneEdge: map.getEdges())

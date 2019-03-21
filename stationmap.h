@@ -38,6 +38,7 @@ public:
     void addOnePoint(PointOnMap *point);
     PointOnMap *getOnePoint(const int point_id);
     bool EdgesEmpty();
+    int CountEdges();
     void findParents();
     void ClearData();
 

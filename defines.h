@@ -1,5 +1,6 @@
 #ifndef DEFINES_H
 #define DEFINES_H
+
 #include <QString>
 
 const QString PROGRAMM_NAME = "Station_map";
@@ -16,10 +17,5 @@ double const MAX_Y = 10000;
 double const MIN_Y = 0;
 
 int const INVALID = -1;
-
-//double const MAX_X = 3000;
-//double const MIN_X = 1500;
-//double const MAX_Y = 5000;
-//double const MIN_Y = 2000;
 
 #endif // DEFINES_H
