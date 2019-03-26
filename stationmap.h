@@ -2,6 +2,7 @@
 #define STATIONMAP_H
 
 #include <vector>
+#include <queue>
 #include <algorithm>
 #include <memory>
 #include <iostream>
@@ -19,8 +20,8 @@ struct PointOnMap {
 
 struct Edge {
     int id;
-    int source;
-    int target;
+    std::vector<int> sources;
+    std::vector<int> targets;
     PointOnMap *start;
     PointOnMap *end;
     float length;
@@ -32,22 +33,26 @@ public:
     StationMap();
     ~StationMap();
     void addOneEdge(Edge *new_edge);
-    Edge *getOneEdge(const int edge_id);
-    void deleteOneEdge(int edge_id);
-    Edge getChildEdge(int edge_id);
-    void addOnePoint(PointOnMap *point);
-    PointOnMap *getOnePoint(const int point_id);
+    Edge *GetOneEdge(const int edge_id);
+    Edge *GetOneEdgeByPointStart(PointOnMap *PointStart);
+    Edge *GetOneEdgeByPointEnd(PointOnMap *PointEnd);
+    void DeleteOneEdge(int edge_id);
+    Edge GetChildEdge(int edge_id);
+    void AddOnePoint(PointOnMap *point);
+    PointOnMap *GetOnePoint(const int point_id);
     bool EdgesEmpty();
-    int CountEdges();
-    void findParents();
+    unsigned long CountEdges();
+    void FindParents();
     void ClearData();
+    bool FindRoute(Edge *EdgeStart, Edge *EdgeEnd);
 
-    std::vector<Edge *> getEdges();
-    std::vector<PointOnMap *> getPoints();
+    std::vector<Edge *> GetEdges();
+    std::vector<PointOnMap *> GetPoints();
 
 private:
     std::vector<PointOnMap *> Points;
     std::vector<Edge *> Edges;
+    std::vector<Edge *> Route;
 };
 
 #endif // STATIONMAP_H

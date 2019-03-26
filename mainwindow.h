@@ -14,8 +14,7 @@
 #include "defines.h"
 #include "stationmap.h"
 #include "profiler.h"
-//#include "ui_dialog.h"
-#include "progress.h"
+
 
 namespace Ui {
 class MainWindow;
@@ -43,10 +42,12 @@ private slots:
 
     void on_leBaseFile_returnPressed();
 
+    void on_pbFindRoute_clicked();
+
 private:
     Ui::MainWindow *ui;
     bool MessBox(QString message);
-    QSqlDatabase dbs = QSqlDatabase::addDatabase("QSQLITE");
+    QSqlDatabase dbs;
     QSqlQuery query;
 //    QString file_name_base = "rzhd.db";
 //    QString file_name_base = "D:/_git/cpp/cjunior-2019/final_task/db/rzhd.db";

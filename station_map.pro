@@ -30,8 +30,7 @@ SOURCES += \
         mainwindow.cpp \
     qcustomplot.cpp \
     logger.cpp \
-    stationmap.cpp \
-    progress.cpp
+    stationmap.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -39,7 +38,6 @@ HEADERS += \
     logger.h \
     stationmap.h \
     profiler.h \
-    progress.h \
     defines.h
 
 FORMS += \

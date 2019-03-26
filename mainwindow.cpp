@@ -8,7 +8,8 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    dbs(QSqlDatabase::addDatabase("QSQLITE"))
 {
     ui->setupUi(this);
 
@@ -49,10 +50,15 @@ void MainWindow::Run()
         ui->cbTo->clear();
     }
     else {
-        for (auto OnePoint: map.getPoints())
+//        for (auto OnePoint: map.GetPoints())
+//        {
+//            ui->cbFrom->addItem(QString::number(OnePoint->id));
+//            ui->cbTo->addItem(QString::number(OnePoint->id));
+//        }
+        for (auto OneEdge: map.GetEdges())
         {
-            ui->cbFrom->addItem(QString::number(OnePoint->id));
-            ui->cbTo->addItem(QString::number(OnePoint->id));
+            ui->cbFrom->addItem(QString::number(OneEdge->id));
+            ui->cbTo->addItem(QString::number(OneEdge->id));
         }
         ui->lbFrom->setEnabled(true);
         ui->lbTo->setEnabled(true);
@@ -115,7 +121,7 @@ void MainWindow::GetDataFromBase()
             point->id = query.value(0).toInt();
             point->x = query.value(1).toFloat();
             point->y =query.value(2).toFloat();
-            map.addOnePoint(point);
+            map.AddOnePoint(point);
             max_x = std::max(max_x, query.value(1).toDouble());
             min_x = std::min(min_x, query.value(1).toDouble());
             max_y = std::max(max_y, query.value(2).toDouble());
@@ -130,15 +136,15 @@ void MainWindow::GetDataFromBase()
         {
             Edge *OneEdge = new Edge;
             OneEdge->id = query.value(0).toInt();
-            OneEdge->start = map.getOnePoint(query.value(1).toInt());
-            OneEdge->end = map.getOnePoint(query.value(2).toInt());
+            OneEdge->start = map.GetOnePoint(query.value(1).toInt());
+            OneEdge->end = map.GetOnePoint(query.value(2).toInt());
             OneEdge->length = query.value(3).toInt();
             map.addOneEdge(OneEdge);
         }
     }
     {
         Profiler prfr("Find Parents:");
-        map.findParents();
+        map.FindParents();
     }
 }
 
@@ -178,8 +184,9 @@ void MainWindow::PaintMap()
             ui->widget->yAxis->setRange(MIN_Y, MAX_Y);
         }
         ui->widget->replot();
+   // вынести в функцию
         int count = 0;
-        for (auto OneEdge: map.getEdges())
+        for (auto OneEdge: map.GetEdges())
         {
             x[0] = static_cast<double>(OneEdge->start->x);
             y[0] = static_cast<double>(OneEdge->start->y);
@@ -273,4 +280,17 @@ void MainWindow::on_leBaseFile_returnPressed()
     map.ClearData();
     file_name_base = ui->leBaseFile->text();
     Run();
+}
+
+void MainWindow::on_pbFindRoute_clicked()
+{
+    if (map.FindRoute(map.GetOneEdge(ui->cbFrom->currentText().toInt()), map.GetOneEdge(ui->cbTo->currentText().toInt())))
+    {
+       //TODO рисуем маршрут
+       QMessageBox::information(nullptr, "Information", "Маршрут найден!");
+    }
+    else
+    {
+        QMessageBox::information(nullptr, "Information", "Маршрут НЕ найден!");
+    }
 }
