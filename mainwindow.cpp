@@ -287,7 +287,27 @@ void MainWindow::on_pbFindRoute_clicked()
     if (map.FindRoute(map.GetOneEdge(ui->cbFrom->currentText().toInt()), map.GetOneEdge(ui->cbTo->currentText().toInt())))
     {
        //TODO рисуем маршрут
-       QMessageBox::information(nullptr, "Information", "Маршрут найден!");
+         QMessageBox::information(nullptr, "Information", "Маршрут найден!");
+       // вынести в функцию
+         QVector<double> x(2), y(2);
+         int count = 0;
+         for (auto OneEdge: map.GetEdgesRoute())
+         {
+             x[0] = static_cast<double>(OneEdge->start->x);
+             y[0] = static_cast<double>(OneEdge->start->y);
+             x[1] = static_cast<double>(OneEdge->end->x);
+             y[1] = static_cast<double>(OneEdge->end->y);
+             ui->widget->addGraph();
+//             ui->widget->graph(count)->setPen(QPen(Qt::red));
+
+             QPen Pen1;
+             Pen1.setWidthF(3);//ширина линии
+             Pen1.setColor(QColor(Qt::red));
+             ui->widget->graph(count)->setPen(Pen1);
+             ui->widget->graph(count)->setData(x, y);
+             count++;
+         }
+         ui->widget->replot();
     }
     else
     {

@@ -77,17 +77,6 @@ void StationMap::ClearData()
     qDebug() << "Clear data";
     qDebug() << "Edges size = " << Edges.size() << "\tEdges capacity: " << Edges.capacity();
     qDebug() << "Points size = " << Points.size() << "\tPoints capacity: " << Points.capacity();
-    // освобождаем выделенную под объекты память
-    for(size_t i = 0; i < Edges.size(); ++i)
-       delete [] Edges[i];
-    // освобождаем выделенную под объекты память
-    for(size_t i = 0; i < Points.size(); ++i)
-       delete [] Points[i];
-    // освобождаем выделенную под объекты память
-    for(size_t i = 0; i < Route.size(); ++i)
-       delete [] Route[i];
-    qDebug() << "Edges size = " << Edges.size() << "\tEdges capacity: " << Edges.capacity();
-    qDebug() << "Points size = " << Points.size() << "\tPoints capacity: " << Points.capacity();
     Edges.clear();
     Points.clear();
     Route.clear();
@@ -182,6 +171,11 @@ Cначала обрабатываются все вершины, смежные
 std::vector<Edge *> StationMap::GetEdges()
 {
     return Edges;
+}
+
+std::vector<Edge *> StationMap::GetEdgesRoute()
+{
+    return Route;
 }
 
 std::vector<PointOnMap *> StationMap::GetPoints()

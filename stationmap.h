@@ -47,6 +47,7 @@ public:
     bool FindRoute(Edge *EdgeStart, Edge *EdgeEnd);
 
     std::vector<Edge *> GetEdges();
+    std::vector<Edge *> GetEdgesRoute();
     std::vector<PointOnMap *> GetPoints();
 
 private:
