@@ -41,6 +41,7 @@ public:
     void AddOnePoint(PointOnMap *point);
     PointOnMap *GetOnePoint(const int point_id);
     bool EdgesEmpty();
+    bool RouteEmpty();
     unsigned long CountEdges();
     void FindParents();
     void ClearData();

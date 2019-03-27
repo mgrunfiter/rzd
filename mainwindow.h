@@ -30,6 +30,9 @@ public:
     bool CheckBase();
     void GetDataFromBase();
     void PaintMap();
+    void PaintGraph(std::vector<Edge *> Edges, int LineWidth=1);
+    void SetCurrentColor(Qt::GlobalColor Color);
+    Qt::GlobalColor GetCurrentColor();
     QString GetFileNameBase();
     ~MainWindow();
 
@@ -55,6 +58,8 @@ private:
 //    QString file_name_base = "*//home/family/cpp/cjunior-2019/final_task/db/rzhd.db";
 //    QString file_name_base = "D:/_git/cpp/rzd/db/rzhd.db";
     StationMap map;
+    int countGraphs = 0;
+    Qt::GlobalColor currentColor = Qt::lightGray;
     double max_x = 0;
     double min_x = 0;
     double max_y = 0;

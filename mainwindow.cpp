@@ -185,19 +185,58 @@ void MainWindow::PaintMap()
         }
         ui->widget->replot();
    // вынести в функцию
-        int count = 0;
-        for (auto OneEdge: map.GetEdges())
+        countGraphs = 0;
+        if (! map.EdgesEmpty())
         {
-            x[0] = static_cast<double>(OneEdge->start->x);
-            y[0] = static_cast<double>(OneEdge->start->y);
-            x[1] = static_cast<double>(OneEdge->end->x);
-            y[1] = static_cast<double>(OneEdge->end->y);
-            ui->widget->addGraph();
-            ui->widget->graph(count)->setData(x, y);
-            count++;
+            PaintGraph(map.GetEdges());
+            currentColor = static_cast<Qt::GlobalColor>(currentColor + 1);
         }
-        ui->widget->replot();
+//        for (auto OneEdge: map.GetEdges())
+//        {
+//            x[0] = static_cast<double>(OneEdge->start->x);
+//            y[0] = static_cast<double>(OneEdge->start->y);
+//            x[1] = static_cast<double>(OneEdge->end->x);
+//            y[1] = static_cast<double>(OneEdge->end->y);
+//            ui->widget->addGraph();
+//            ui->widget->graph(countGraphs)->setData(x, y);
+//            countGraphs++;
+//        }
+//        ui->widget->replot();
     }
+}
+
+void MainWindow::PaintGraph(std::vector<Edge *> Edges, int LineWidth)
+{
+    QVector<double> x(2), y(2);
+    for (auto OneEdge: Edges)
+    {
+        x[0] = static_cast<double>(OneEdge->start->x);
+        y[0] = static_cast<double>(OneEdge->start->y);
+        x[1] = static_cast<double>(OneEdge->end->x);
+        y[1] = static_cast<double>(OneEdge->end->y);
+        ui->widget->addGraph();
+        QPen Pen;
+        Pen.setWidthF(LineWidth);//ширина линии
+        Pen.setColor(currentColor);
+        ui->widget->graph(countGraphs)->setPen(Pen);
+        ui->widget->graph(countGraphs)->setData(x, y);
+        countGraphs++;
+    }
+    ui->widget->replot();
+}
+
+void MainWindow::SetCurrentColor(Qt::GlobalColor Color)
+{
+    if (Color > 6 && Color < 18)
+        currentColor = Color;
+    else {
+        currentColor = Qt::red;
+    }
+}
+
+Qt::GlobalColor MainWindow::GetCurrentColor()
+{
+    return currentColor;
 }
 
 
@@ -266,6 +305,7 @@ void MainWindow::on_tbBaseFile_clicked()
         dbs.close();
     }
     map.ClearData();
+    countGraphs = 0;
     file_name_base = GetFileNameBase();
     ui->leBaseFile->setText(file_name_base);
     Run();
@@ -278,6 +318,7 @@ void MainWindow::on_leBaseFile_returnPressed()
         dbs.close();
     }
     map.ClearData();
+    countGraphs = 0;
     file_name_base = ui->leBaseFile->text();
     Run();
 }
@@ -286,28 +327,12 @@ void MainWindow::on_pbFindRoute_clicked()
 {
     if (map.FindRoute(map.GetOneEdge(ui->cbFrom->currentText().toInt()), map.GetOneEdge(ui->cbTo->currentText().toInt())))
     {
-       //TODO рисуем маршрут
-         QMessageBox::information(nullptr, "Information", "Маршрут найден!");
-       // вынести в функцию
-         QVector<double> x(2), y(2);
-         int count = 0;
-         for (auto OneEdge: map.GetEdgesRoute())
-         {
-             x[0] = static_cast<double>(OneEdge->start->x);
-             y[0] = static_cast<double>(OneEdge->start->y);
-             x[1] = static_cast<double>(OneEdge->end->x);
-             y[1] = static_cast<double>(OneEdge->end->y);
-             ui->widget->addGraph();
-//             ui->widget->graph(count)->setPen(QPen(Qt::red));
-
-             QPen Pen1;
-             Pen1.setWidthF(3);//ширина линии
-             Pen1.setColor(QColor(Qt::red));
-             ui->widget->graph(count)->setPen(Pen1);
-             ui->widget->graph(count)->setData(x, y);
-             count++;
-         }
-         ui->widget->replot();
+        QMessageBox::information(nullptr, "Information", "Маршрут найден!");
+        if (! map.RouteEmpty())
+        {
+            PaintGraph(map.GetEdgesRoute(), 3);
+            currentColor = static_cast<Qt::GlobalColor>(currentColor + 1);
+        }
     }
     else
     {

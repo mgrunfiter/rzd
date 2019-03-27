@@ -50,6 +50,11 @@ bool StationMap::EdgesEmpty()
     return Edges.empty();
 }
 
+bool StationMap::RouteEmpty()
+{
+    return Route.empty();
+}
+
 unsigned long StationMap::CountEdges()
 {
     return Edges.size();
@@ -91,9 +96,7 @@ bool StationMap::FindRoute(Edge * EdgeStart, Edge * EdgeEnd)
 {
     //TODO
     qDebug() << "EdgeStart ID = " << EdgeStart->id;
-    qDebug() << "EdgeEnd ID = " << EdgeEnd->id;
-    // Рекурсия
-    
+    qDebug() << "EdgeEnd ID = " << EdgeEnd->id;   
 /*
 Поиск в ширину
 
@@ -112,6 +115,8 @@ Cначала обрабатываются все вершины, смежные
 5   просмотреть весь список смежных с нею вершин и поместить в очередь все еще не обработанные вершины
 */
     bool Flag = false;
+    Route.clear();
+    std::vector<Edge *>().swap(Route);
     std::queue <int> turn;   // Это наша очеред
     std::vector <int> done;  // Список обработанных вершин
     if (EdgeStart->id != EdgeEnd->id)
