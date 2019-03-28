@@ -3,12 +3,13 @@
 
 #include <vector>
 #include <queue>
+#include <stack>
 #include <algorithm>
 #include <memory>
 #include <iostream>
 #include "defines.h"
 #include "logger.h"
-
+#include "profiler.h"
 
 //https://www.programmersforum.ru/showthread.php?t=252350
 

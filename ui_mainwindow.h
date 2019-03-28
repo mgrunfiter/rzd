@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 5.6.3
+** Created by: Qt User Interface Compiler version 5.12.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,13 +10,10 @@
 #define UI_MAINWINDOW_H
 
 #include <QtCore/QVariant>
-#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
-#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
@@ -54,19 +51,19 @@ public:
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
-            MainWindow->setObjectName(QStringLiteral("MainWindow"));
+            MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
         MainWindow->resize(680, 340);
         centralWidget = new QWidget(MainWindow);
-        centralWidget->setObjectName(QStringLiteral("centralWidget"));
+        centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         gridLayout_2 = new QGridLayout(centralWidget);
         gridLayout_2->setSpacing(6);
         gridLayout_2->setContentsMargins(11, 11, 11, 11);
-        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
+        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setSpacing(6);
-        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
+        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
         widget = new QCustomPlot(centralWidget);
-        widget->setObjectName(QStringLiteral("widget"));
+        widget->setObjectName(QString::fromUtf8("widget"));
         widget->setLayoutDirection(Qt::LeftToRight);
         widget->setAutoFillBackground(true);
 
@@ -77,9 +74,9 @@ public:
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(6);
-        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         lbFileDase = new QLabel(centralWidget);
-        lbFileDase->setObjectName(QStringLiteral("lbFileDase"));
+        lbFileDase->setObjectName(QString::fromUtf8("lbFileDase"));
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -90,9 +87,9 @@ public:
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
-        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         leBaseFile = new QLineEdit(centralWidget);
-        leBaseFile->setObjectName(QStringLiteral("leBaseFile"));
+        leBaseFile->setObjectName(QString::fromUtf8("leBaseFile"));
         QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Fixed);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
@@ -103,12 +100,12 @@ public:
         horizontalLayout->addWidget(leBaseFile);
 
         tbBaseFile = new QToolButton(centralWidget);
-        tbBaseFile->setObjectName(QStringLiteral("tbBaseFile"));
+        tbBaseFile->setObjectName(QString::fromUtf8("tbBaseFile"));
 
         horizontalLayout->addWidget(tbBaseFile);
 
         lbFrom = new QLabel(centralWidget);
-        lbFrom->setObjectName(QStringLiteral("lbFrom"));
+        lbFrom->setObjectName(QString::fromUtf8("lbFrom"));
         QSizePolicy sizePolicy2(QSizePolicy::Maximum, QSizePolicy::Fixed);
         sizePolicy2.setHorizontalStretch(0);
         sizePolicy2.setVerticalStretch(0);
@@ -119,28 +116,31 @@ public:
         horizontalLayout->addWidget(lbFrom);
 
         cbFrom = new QComboBox(centralWidget);
-        cbFrom->setObjectName(QStringLiteral("cbFrom"));
+        cbFrom->setObjectName(QString::fromUtf8("cbFrom"));
         sizePolicy2.setHeightForWidth(cbFrom->sizePolicy().hasHeightForWidth());
         cbFrom->setSizePolicy(sizePolicy2);
+        cbFrom->setInputMethodHints(Qt::ImhNone);
+        cbFrom->setEditable(true);
 
         horizontalLayout->addWidget(cbFrom);
 
         lbTo = new QLabel(centralWidget);
-        lbTo->setObjectName(QStringLiteral("lbTo"));
+        lbTo->setObjectName(QString::fromUtf8("lbTo"));
         sizePolicy2.setHeightForWidth(lbTo->sizePolicy().hasHeightForWidth());
         lbTo->setSizePolicy(sizePolicy2);
 
         horizontalLayout->addWidget(lbTo);
 
         cbTo = new QComboBox(centralWidget);
-        cbTo->setObjectName(QStringLiteral("cbTo"));
+        cbTo->setObjectName(QString::fromUtf8("cbTo"));
         sizePolicy2.setHeightForWidth(cbTo->sizePolicy().hasHeightForWidth());
         cbTo->setSizePolicy(sizePolicy2);
+        cbTo->setEditable(true);
 
         horizontalLayout->addWidget(cbTo);
 
         pbFindRoute = new QPushButton(centralWidget);
-        pbFindRoute->setObjectName(QStringLiteral("pbFindRoute"));
+        pbFindRoute->setObjectName(QString::fromUtf8("pbFindRoute"));
 
         horizontalLayout->addWidget(pbFindRoute);
 
@@ -152,14 +152,14 @@ public:
 
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
-        menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 680, 21));
+        menuBar->setObjectName(QString::fromUtf8("menuBar"));
+        menuBar->setGeometry(QRect(0, 0, 680, 20));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
-        mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
+        mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
         MainWindow->addToolBar(Qt::TopToolBarArea, mainToolBar);
         statusBar = new QStatusBar(MainWindow);
-        statusBar->setObjectName(QStringLiteral("statusBar"));
+        statusBar->setObjectName(QString::fromUtf8("statusBar"));
         MainWindow->setStatusBar(statusBar);
 
         retranslateUi(MainWindow);
@@ -169,13 +169,13 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", Q_NULLPTR));
-        lbFileDase->setText(QApplication::translate("MainWindow", "\320\244\320\260\320\271\320\273 \320\221\320\224:", Q_NULLPTR));
-        leBaseFile->setPlaceholderText(QApplication::translate("MainWindow", "path to rzhd.db file", Q_NULLPTR));
-        tbBaseFile->setText(QApplication::translate("MainWindow", "...", Q_NULLPTR));
-        lbFrom->setText(QApplication::translate("MainWindow", "\320\230\320\267:    ", Q_NULLPTR));
-        lbTo->setText(QApplication::translate("MainWindow", "\320\222:  ", Q_NULLPTR));
-        pbFindRoute->setText(QApplication::translate("MainWindow", "\320\235\320\260\320\271\321\202\320\270 \320\274\320\260\321\200\321\210\321\200\321\203\321\202", Q_NULLPTR));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
+        lbFileDase->setText(QApplication::translate("MainWindow", "\320\244\320\260\320\271\320\273 \320\221\320\224:", nullptr));
+        leBaseFile->setPlaceholderText(QApplication::translate("MainWindow", "path to rzhd.db file", nullptr));
+        tbBaseFile->setText(QApplication::translate("MainWindow", "...", nullptr));
+        lbFrom->setText(QApplication::translate("MainWindow", "\320\230\320\267:    ", nullptr));
+        lbTo->setText(QApplication::translate("MainWindow", "\320\222:  ", nullptr));
+        pbFindRoute->setText(QApplication::translate("MainWindow", "\320\235\320\260\320\271\321\202\320\270 \320\274\320\260\321\200\321\210\321\200\321\203\321\202", nullptr));
     } // retranslateUi
 
 };

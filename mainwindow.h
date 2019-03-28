@@ -30,7 +30,7 @@ public:
     bool CheckBase();
     void GetDataFromBase();
     void PaintMap();
-    void PaintGraph(std::vector<Edge *> Edges, int LineWidth=1);
+    void PaintGraph(std::vector<Edge *> Edges, int LineWidth=1, bool all=true);
     void SetCurrentColor(Qt::GlobalColor Color);
     Qt::GlobalColor GetCurrentColor();
     QString GetFileNameBase();
@@ -47,6 +47,8 @@ private slots:
 
     void on_pbFindRoute_clicked();
 
+    void on_cbFrom_currentTextChanged(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
     bool MessBox(QString message);
@@ -59,7 +61,7 @@ private:
 //    QString file_name_base = "D:/_git/cpp/rzd/db/rzhd.db";
     StationMap map;
     int countGraphs = 0;
-    Qt::GlobalColor currentColor = Qt::lightGray;
+    Qt::GlobalColor currentColor = Qt::darkGray;
     double max_x = 0;
     double min_x = 0;
     double max_y = 0;

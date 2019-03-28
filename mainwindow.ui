@@ -96,6 +96,12 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="inputMethodHints">
+           <set>Qt::ImhNone</set>
+          </property>
+          <property name="editable">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
         <item>
@@ -119,6 +125,9 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="editable">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
         <item>
@@ -140,7 +149,7 @@
      <x>0</x>
      <y>0</y>
      <width>680</width>
-     <height>21</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>

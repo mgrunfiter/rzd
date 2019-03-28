@@ -184,28 +184,16 @@ void MainWindow::PaintMap()
             ui->widget->yAxis->setRange(MIN_Y, MAX_Y);
         }
         ui->widget->replot();
-   // вынести в функцию
         countGraphs = 0;
         if (! map.EdgesEmpty())
         {
             PaintGraph(map.GetEdges());
-            currentColor = static_cast<Qt::GlobalColor>(currentColor + 1);
+            currentColor = static_cast<Qt::GlobalColor>(currentColor + 3);
         }
-//        for (auto OneEdge: map.GetEdges())
-//        {
-//            x[0] = static_cast<double>(OneEdge->start->x);
-//            y[0] = static_cast<double>(OneEdge->start->y);
-//            x[1] = static_cast<double>(OneEdge->end->x);
-//            y[1] = static_cast<double>(OneEdge->end->y);
-//            ui->widget->addGraph();
-//            ui->widget->graph(countGraphs)->setData(x, y);
-//            countGraphs++;
-//        }
-//        ui->widget->replot();
     }
 }
 
-void MainWindow::PaintGraph(std::vector<Edge *> Edges, int LineWidth)
+void MainWindow::PaintGraph(std::vector<Edge *> Edges, int LineWidth, bool all)
 {
     QVector<double> x(2), y(2);
     for (auto OneEdge: Edges)
@@ -221,6 +209,26 @@ void MainWindow::PaintGraph(std::vector<Edge *> Edges, int LineWidth)
         ui->widget->graph(countGraphs)->setPen(Pen);
         ui->widget->graph(countGraphs)->setData(x, y);
         countGraphs++;
+    }
+    //формируем вид начальной и конечной точек, если это маршрут
+    if (! all)
+    {
+        QCPGraph* dwPoints = new QCPGraph(ui->widget->xAxis, ui->widget->yAxis);
+        dwPoints->setAdaptiveSampling(false);
+        dwPoints->setLineStyle(QCPGraph::lsNone);
+        dwPoints->setScatterStyle(QCPScatterStyle::ssCircle);
+        dwPoints->setPen(QPen(QBrush(currentColor), 1));
+        QVector<double> PointsX;
+        QVector<double> PointsY;
+        PointsX.push_back(static_cast<double>(Edges.front()->start->x));
+        PointsX.push_back(static_cast<double>(Edges.back()->end->x));
+        PointsY.push_back(static_cast<double>(Edges.front()->start->y));
+        PointsY.push_back(static_cast<double>(Edges.back()->end->y));
+        dwPoints->addData(PointsX, PointsY);
+        PointsX.clear();
+        PointsY.clear();
+        QVector<double>().swap(PointsX);
+        QVector<double>().swap(PointsY);
     }
     ui->widget->replot();
 }
@@ -327,15 +335,20 @@ void MainWindow::on_pbFindRoute_clicked()
 {
     if (map.FindRoute(map.GetOneEdge(ui->cbFrom->currentText().toInt()), map.GetOneEdge(ui->cbTo->currentText().toInt())))
     {
-        QMessageBox::information(nullptr, "Information", "Маршрут найден!");
         if (! map.RouteEmpty())
         {
-            PaintGraph(map.GetEdgesRoute(), 3);
+            PaintGraph(map.GetEdgesRoute(), 3, false);
             currentColor = static_cast<Qt::GlobalColor>(currentColor + 1);
         }
+        QMessageBox::information(nullptr, "Information", "Маршрут найден!");
     }
     else
     {
         QMessageBox::information(nullptr, "Information", "Маршрут НЕ найден!");
     }
+}
+
+void MainWindow::on_cbFrom_currentTextChanged(const QString &arg1)
+{
+
 }

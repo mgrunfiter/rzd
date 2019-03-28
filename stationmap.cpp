@@ -92,11 +92,6 @@ void StationMap::ClearData()
     qDebug() << "Points size = " << Points.size() << "\tPoints capacity: " << Points.capacity();
 }
 
-bool StationMap::FindRoute(Edge * EdgeStart, Edge * EdgeEnd)
-{
-    //TODO
-    qDebug() << "EdgeStart ID = " << EdgeStart->id;
-    qDebug() << "EdgeEnd ID = " << EdgeEnd->id;   
 /*
 Поиск в ширину
 
@@ -114,6 +109,12 @@ Cначала обрабатываются все вершины, смежные
     4 если вершина еще не обработана, то обработать ее и поместить в список обработанных вершин
 5   просмотреть весь список смежных с нею вершин и поместить в очередь все еще не обработанные вершины
 */
+
+bool StationMap::FindRoute(Edge * EdgeStart, Edge * EdgeEnd)
+{
+    Profiler pfr("FindRoute W");
+    qDebug() << "EdgeStart ID = " << EdgeStart->id;
+    qDebug() << "EdgeEnd ID = " << EdgeEnd->id;
     bool Flag = false;
     Route.clear();
     std::vector<Edge *>().swap(Route);
@@ -123,11 +124,9 @@ Cначала обрабатываются все вершины, смежные
     {
         for (auto OneEdgeID: EdgeStart->targets)
         {
-            qDebug() << "turn OneEdge ID = " << OneEdgeID;
             turn.push(OneEdgeID);
         }
         done.push_back(EdgeStart->id);
-        qDebug() << "done OneEdge ID = " << EdgeStart->id;
     }
     while (!turn.empty())
     {
@@ -138,20 +137,19 @@ Cначала обрабатываются все вершины, смежные
         qDebug() << (it-done.begin());
         if (it != done.end())
         {
-            qDebug() << "пропускаем, уже просмотрен " << ind;
             continue;
         }
-//        else
-//        {
-//            done.push_back(ind);
-//        }
         Edge *CurrentEdge = GetOneEdge(ind);
         if (CurrentEdge->id == EdgeEnd->id)
         {
             // Конец маршрута, нашли
             done.push_back(CurrentEdge->id);
+            // TODO выкинуть тупиковые ребра из done
+
+            //
             for (auto OneEdgeID: done)
             {
+                qDebug() << "ID=" << OneEdgeID;
                 Route.push_back(GetOneEdge(OneEdgeID));
             }
             Flag = true;
@@ -161,17 +159,92 @@ Cначала обрабатываются все вершины, смежные
         {
             for (auto OneEdgeID: CurrentEdge->targets)
             {
-                qDebug() << "turn OneEdge ID = " << OneEdgeID;
                 turn.push(OneEdgeID);
             }
             done.push_back(CurrentEdge->id);
-            qDebug() << "done CurrentEdge ID = " << CurrentEdge->id;
         }
 
     }
     qDebug() << "end FindRoute";
     return Flag;
 }
+
+
+/*
+Поиск в глубину
+
+Поиск в глубину использует две структуры – стек для запоминания еще не обработанных вершин и список для запоминания уже обработанных.
+Поиск выполняется следующим образом:
+
+1 задать стартовую вершину (аналог корневой вершины при обходе дерева)
+2 обработать стартовую вершину и включить ее во вспомогательный список обработанных вершин
+3 включить в стек все вершины, смежные со стартовой
+4 организовать цикл по условию опустошения стека и внутри цикла выполнить:
+    1 извлечь из стека очередную вершину
+    2 проверить по вспомогательному списку обработанность этой вершины
+    3 если вершина уже обработана, то извлечь из стека следующую вершину
+    4 если вершина еще не обработана, то обработать ее и поместить в список обработанных вершин
+    5 просмотреть весь список смежных с нею вершин и поместить в стек все еще не обработанные вершины
+*/
+/*
+bool StationMap::FindRoute(Edge * EdgeStart, Edge * EdgeEnd)
+{
+    Profiler pfr("FindRoute D");
+    //TODO
+    qDebug() << "EdgeStart ID = " << EdgeStart->id;
+    qDebug() << "EdgeEnd ID = " << EdgeEnd->id;   
+
+    bool Flag = false;
+    Route.clear();
+    std::vector<Edge *>().swap(Route);
+    std::stack <int> turn;   // Это наш стек
+    std::vector <int> done;  // Список обработанных вершин
+    if (EdgeStart->id != EdgeEnd->id)
+    {
+        for (auto OneEdgeID: EdgeStart->targets)
+        {
+            turn.push(OneEdgeID);
+        }
+        done.push_back(EdgeStart->id);
+    }
+    while (!turn.empty())
+    {
+        int ind = turn.top();
+        turn.pop();
+        std::vector<int>::iterator it = std::find(done.begin(), done.end(), ind);
+        qDebug() << *it;
+        qDebug() << (it-done.begin());
+        if (it != done.end())
+        {
+            continue;
+        }
+        Edge *CurrentEdge = GetOneEdge(ind);
+        if (CurrentEdge->id == EdgeEnd->id)
+        {
+            // Конец маршрута, нашли
+            done.push_back(CurrentEdge->id);
+            for (auto OneEdgeID: done)
+            {
+                qDebug() << "ID=" << OneEdgeID;
+                Route.push_back(GetOneEdge(OneEdgeID));
+            }
+            Flag = true;
+            break;
+        }
+        else
+        {
+            for (auto OneEdgeID: CurrentEdge->targets)
+            {
+                turn.push(OneEdgeID);
+            }
+            done.push_back(CurrentEdge->id);
+        }
+
+    }
+    qDebug() << "end FindRoute";
+    return Flag;
+}
+*/
 
 std::vector<Edge *> StationMap::GetEdges()
 {
