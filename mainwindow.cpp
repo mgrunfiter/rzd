@@ -229,6 +229,10 @@ void MainWindow::PaintGraph(std::vector<Edge *> Edges, int LineWidth, bool all)
         PointsY.clear();
         QVector<double>().swap(PointsX);
         QVector<double>().swap(PointsY);
+        double xl = ui->widget->xAxis->pixelToCoord(Edges.front()->start->x);
+        double yl = ui->widget->xAxis->pixelToCoord(Edges.front()->start->y);
+        QLabel *lStart = new QLabel(this);
+        lStart->setText("qqqqqqqqqqqqqqqqqqqqqqqqqqqqq");
     }
     ui->widget->replot();
 }
