@@ -209,6 +209,37 @@ void MainWindow::PaintGraph(std::vector<Edge *> Edges, int LineWidth, bool all)
     // TODO
     if (! all)
     {
+        // add the text label at the top:
+        QCPItemText *textLabelStart = new QCPItemText(ui->widget);
+        textLabelStart->setPositionAlignment(Qt::AlignTop|Qt::AlignHCenter);
+//        textLabel->position->setType(QCPItemPosition::ptAxisRectRatio);
+//        textLabel->position->setCoords(0.5, 0); // place position at center/top of axis rect
+        textLabelStart->position->setCoords(static_cast<double>(Edges.back()->start->x), static_cast<double>(Edges.back()->start->y) - 10); // place position at center/top of axis rect
+        textLabelStart->setText("Start: " + QString::number(Edges.back()->id));
+        textLabelStart->setFont(QFont(font().family(), 8)); // make font a bit larger
+        textLabelStart->setPen(QPen(Qt::black)); // show black border around text
+        // add the arrow:
+        QCPItemLine *arrowStart = new QCPItemLine(ui->widget);
+        arrowStart->start->setParentAnchor(textLabelStart->top);
+        arrowStart->end->setCoords(static_cast<double>(Edges.back()->start->x), static_cast<double>(Edges.back()->start->y)); // point to (4, 1.6) in x-y-plot coordinates
+        arrowStart->setHead(QCPLineEnding::esSpikeArrow);
+
+        QCPItemText *textLabelFinish = new QCPItemText(ui->widget);
+        textLabelFinish->setPositionAlignment(Qt::AlignTop|Qt::AlignHCenter);
+//        textLabel->position->setType(QCPItemPosition::ptAxisRectRatio);
+//        textLabel->position->setCoords(0.5, 0); // place position at center/top of axis rect
+        textLabelFinish->position->setCoords(static_cast<double>(Edges.front()->end->x), static_cast<double>(Edges.front()->end->y) + 30); // place position at center/top of axis rect
+        textLabelFinish->setText("Finish: " + QString::number(Edges.front()->id));
+        textLabelFinish->setFont(QFont(font().family(), 8)); // make font a bit larger
+        textLabelFinish->setPen(QPen(Qt::black)); // show black border around text
+        // add the arrow:
+        QCPItemLine *arrowFinish = new QCPItemLine(ui->widget);
+        arrowFinish->start->setParentAnchor(textLabelFinish->bottom);
+        arrowFinish->end->setCoords(static_cast<double>(Edges.front()->end->x), static_cast<double>(Edges.front()->end->y)); // point to (4, 1.6) in x-y-plot coordinates
+        arrowFinish->setHead(QCPLineEnding::esSpikeArrow);
+
+
+
 //        QCPGraph* dwPoints = new QCPGraph(ui->widget->xAxis, ui->widget->yAxis);
 //        if (countRoute == 0)
 //        {
