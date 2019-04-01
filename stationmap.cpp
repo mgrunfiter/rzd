@@ -110,7 +110,7 @@ Cначала обрабатываются все вершины, смежные
 5   просмотреть весь список смежных с нею вершин и поместить в очередь все еще не обработанные вершины
 */
 
-bool StationMap::FindRoute(Edge * EdgeStart, Edge * EdgeEnd)
+bool StationMap::FindRouteBFS(Edge * EdgeStart, Edge * EdgeEnd)
 {
     Profiler pfr("FindRoute W");
     qDebug() << "EdgeStart ID = " << EdgeStart->id;
@@ -144,13 +144,36 @@ bool StationMap::FindRoute(Edge * EdgeStart, Edge * EdgeEnd)
         {
             // Конец маршрута, нашли
             done.push_back(CurrentEdge->id);
-            // TODO выкинуть тупиковые ребра из done
-
-            //
+            std::vector<Edge *> tmpRoute;
             for (auto OneEdgeID: done)
             {
-                qDebug() << "ID=" << OneEdgeID;
-                Route.push_back(GetOneEdge(OneEdgeID));
+                tmpRoute.push_back(GetOneEdge(OneEdgeID));
+            }
+            int count = 0;
+            Edge *curEdge = CurrentEdge;
+            for (auto it = tmpRoute.rbegin(); it != tmpRoute.rend(); ++it)
+            {
+                Edge *tmpEdge = *it;
+                if (count == 0)
+                {
+                    qDebug() << "ID=" << tmpEdge->id;
+                    Route.push_back(tmpEdge);
+                    curEdge = tmpEdge;
+                    count++;
+                }
+                else
+                {
+                    Edge *tmpEdge = *it;
+                    if (curEdge->start->id != tmpEdge->end->id)
+                        continue;
+                    else
+                    {
+                        qDebug() << "ID=" << tmpEdge->id;
+                        Route.push_back(tmpEdge);
+                        curEdge = tmpEdge;
+                        count++;
+                    }
+                }
             }
             Flag = true;
             break;
@@ -186,11 +209,10 @@ bool StationMap::FindRoute(Edge * EdgeStart, Edge * EdgeEnd)
     4 если вершина еще не обработана, то обработать ее и поместить в список обработанных вершин
     5 просмотреть весь список смежных с нею вершин и поместить в стек все еще не обработанные вершины
 */
-/*
-bool StationMap::FindRoute(Edge * EdgeStart, Edge * EdgeEnd)
+
+bool StationMap::FindRouteDFS(Edge * EdgeStart, Edge * EdgeEnd)
 {
     Profiler pfr("FindRoute D");
-    //TODO
     qDebug() << "EdgeStart ID = " << EdgeStart->id;
     qDebug() << "EdgeEnd ID = " << EdgeEnd->id;   
 
@@ -223,10 +245,36 @@ bool StationMap::FindRoute(Edge * EdgeStart, Edge * EdgeEnd)
         {
             // Конец маршрута, нашли
             done.push_back(CurrentEdge->id);
+            std::vector<Edge *> tmpRoute;
             for (auto OneEdgeID: done)
             {
-                qDebug() << "ID=" << OneEdgeID;
-                Route.push_back(GetOneEdge(OneEdgeID));
+                tmpRoute.push_back(GetOneEdge(OneEdgeID));
+            }
+            int count = 0;
+            Edge *curEdge = CurrentEdge;
+            for (auto it = tmpRoute.rbegin(); it != tmpRoute.rend(); ++it)
+            {
+                Edge *tmpEdge = *it;
+                if (count == 0)
+                {
+                    qDebug() << "ID=" << tmpEdge->id;
+                    Route.push_back(tmpEdge);
+                    curEdge = tmpEdge;
+                    count++;
+                }
+                else
+                {
+                    Edge *tmpEdge = *it;
+                    if (curEdge->start->id != tmpEdge->end->id)
+                        continue;
+                    else
+                    {
+                        qDebug() << "ID=" << tmpEdge->id;
+                        Route.push_back(tmpEdge);
+                        curEdge = tmpEdge;
+                        count++;
+                    }
+                }
             }
             Flag = true;
             break;
@@ -244,7 +292,6 @@ bool StationMap::FindRoute(Edge * EdgeStart, Edge * EdgeEnd)
     qDebug() << "end FindRoute";
     return Flag;
 }
-*/
 
 std::vector<Edge *> StationMap::GetEdges()
 {

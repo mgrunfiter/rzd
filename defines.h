@@ -8,7 +8,6 @@ const QString VERSION = "v0.1";
 const QString FULL_PROGRAMM_NAME = PROGRAMM_NAME + " " + VERSION;
 const QString LOG_NAME = PROGRAMM_NAME + "_" + VERSION + ".log";
 
-//double const EPSILON = 0.00001;
 double const EPSILON = 0.0;
 
 double const MAX_X = 10000;

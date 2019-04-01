@@ -42,26 +42,20 @@ protected:
 
 private slots:
     void on_tbBaseFile_clicked();
-
     void on_leBaseFile_returnPressed();
-
     void on_pbFindRoute_clicked();
 
-    void on_cbFrom_currentTextChanged(const QString &arg1);
-
 private:
+    void ReOpen();
     Ui::MainWindow *ui;
     bool MessBox(QString message);
     QSqlDatabase dbs;
     QSqlQuery query;
-//    QString file_name_base = "rzhd.db";
-//    QString file_name_base = "D:/_git/cpp/cjunior-2019/final_task/db/rzhd.db";
-    QString file_name_base = "/home/csv/study/github/rzd/db/rzhd.db";
-//    QString file_name_base = "*//home/family/cpp/cjunior-2019/final_task/db/rzhd.db";
-//    QString file_name_base = "D:/_git/cpp/rzd/db/rzhd.db";
+    QString file_name_base = "rzhd.db";
     StationMap map;
     int countGraphs = 0;
     Qt::GlobalColor currentColor = Qt::darkGray;
+    int countRoute = 0;
     double max_x = 0;
     double min_x = 0;
     double max_y = 0;

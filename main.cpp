@@ -2,7 +2,6 @@
 
 
 // Данные для ведения логов
-//static QTextStream* logStream;
 static QFile* logFile;
 
 void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg);
@@ -37,7 +36,7 @@ void messageHandler(QtMsgType type, const QMessageLogContext &context, const QSt
 {
     // Открываем поток записи в файл
     QTextStream out(logFile);
-    QTextStream outcons(stdout);
+//    QTextStream outcons(stdout);
     // Записываем дату записи
     out << QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz ");
     // По типу определяем, к какому уровню относится сообщение
@@ -51,6 +50,6 @@ void messageHandler(QtMsgType type, const QMessageLogContext &context, const QSt
     }
     // Записываем в вывод категорию сообщения и само сообщение
     out << context.category << ": " << msg << endl;
-    outcons << context.category << ": " << msg << endl;
+//    outcons << context.category << ": " << msg << endl;
     out.flush();    // Очищаем буферизированные данные
 }

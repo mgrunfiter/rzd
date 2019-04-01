@@ -46,7 +46,10 @@ public:
     unsigned long CountEdges();
     void FindParents();
     void ClearData();
-    bool FindRoute(Edge *EdgeStart, Edge *EdgeEnd);
+    // обход в ширину
+    bool FindRouteBFS(Edge *EdgeStart, Edge *EdgeEnd);
+    // обход в глубину
+    bool FindRouteDFS(Edge *EdgeStart, Edge *EdgeEnd);
 
     std::vector<Edge *> GetEdges();
     std::vector<Edge *> GetEdgesRoute();

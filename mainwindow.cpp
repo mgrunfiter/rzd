@@ -50,11 +50,6 @@ void MainWindow::Run()
         ui->cbTo->clear();
     }
     else {
-//        for (auto OnePoint: map.GetPoints())
-//        {
-//            ui->cbFrom->addItem(QString::number(OnePoint->id));
-//            ui->cbTo->addItem(QString::number(OnePoint->id));
-//        }
         for (auto OneEdge: map.GetEdges())
         {
             ui->cbFrom->addItem(QString::number(OneEdge->id));
@@ -211,28 +206,36 @@ void MainWindow::PaintGraph(std::vector<Edge *> Edges, int LineWidth, bool all)
         countGraphs++;
     }
     //формируем вид начальной и конечной точек, если это маршрут
+    // TODO
     if (! all)
     {
-        QCPGraph* dwPoints = new QCPGraph(ui->widget->xAxis, ui->widget->yAxis);
-        dwPoints->setAdaptiveSampling(false);
-        dwPoints->setLineStyle(QCPGraph::lsNone);
-        dwPoints->setScatterStyle(QCPScatterStyle::ssCircle);
-        dwPoints->setPen(QPen(QBrush(currentColor), 1));
-        QVector<double> PointsX;
-        QVector<double> PointsY;
-        PointsX.push_back(static_cast<double>(Edges.front()->start->x));
-        PointsX.push_back(static_cast<double>(Edges.back()->end->x));
-        PointsY.push_back(static_cast<double>(Edges.front()->start->y));
-        PointsY.push_back(static_cast<double>(Edges.back()->end->y));
-        dwPoints->addData(PointsX, PointsY);
-        PointsX.clear();
-        PointsY.clear();
-        QVector<double>().swap(PointsX);
-        QVector<double>().swap(PointsY);
-        double xl = ui->widget->xAxis->pixelToCoord(Edges.front()->start->x);
-        double yl = ui->widget->xAxis->pixelToCoord(Edges.front()->start->y);
-        QLabel *lStart = new QLabel(this);
-        lStart->setText("qqqqqqqqqqqqqqqqqqqqqqqqqqqqq");
+//        QCPGraph* dwPoints = new QCPGraph(ui->widget->xAxis, ui->widget->yAxis);
+//        if (countRoute == 0)
+//        {
+//            countRoute++;
+//        }
+//        else {
+////            dwPoints->d
+//        }
+//        dwPoints->setAdaptiveSampling(false);
+//        dwPoints->setLineStyle(QCPGraph::lsNone);
+//        dwPoints->setScatterStyle(QCPScatterStyle::ssCircle);
+//        dwPoints->setPen(QPen(QBrush(currentColor), 1));
+//        QVector<double> PointsX;
+//        QVector<double> PointsY;
+//        PointsX.push_back(static_cast<double>(Edges.front()->end->x));
+//        PointsX.push_back(static_cast<double>(Edges.back()->start->x));
+//        PointsY.push_back(static_cast<double>(Edges.front()->end->y));
+//        PointsY.push_back(static_cast<double>(Edges.back()->start->y));
+//        dwPoints->addData(PointsX, PointsY);
+//        PointsX.clear();
+//        PointsY.clear();
+//        QVector<double>().swap(PointsX);
+//        QVector<double>().swap(PointsY);
+//        double xl = ui->widget->xAxis->pixelToCoord(Edges.front()->start->x);
+//        double yl = ui->widget->xAxis->pixelToCoord(Edges.front()->start->y);
+//        QLabel *lStart = new QLabel(this);
+//        lStart->setText("qqqqqqqqqqqqqqqqqqqqqqqqqqqqq");
     }
     ui->widget->replot();
 }
@@ -312,32 +315,18 @@ QString MainWindow::GetFileNameBase()
 
 void MainWindow::on_tbBaseFile_clicked()
 {
-    if (dbs.isOpen())
-    {
-        dbs.close();
-    }
-    map.ClearData();
-    countGraphs = 0;
-    file_name_base = GetFileNameBase();
-    ui->leBaseFile->setText(file_name_base);
-    Run();
+    ReOpen();
 }
 
 void MainWindow::on_leBaseFile_returnPressed()
 {
-    if (dbs.isOpen())
-    {
-        dbs.close();
-    }
-    map.ClearData();
-    countGraphs = 0;
-    file_name_base = ui->leBaseFile->text();
-    Run();
+    ReOpen();
 }
 
 void MainWindow::on_pbFindRoute_clicked()
 {
-    if (map.FindRoute(map.GetOneEdge(ui->cbFrom->currentText().toInt()), map.GetOneEdge(ui->cbTo->currentText().toInt())))
+//    if (map.FindRouteBFS(map.GetOneEdge(ui->cbFrom->currentText().toInt()), map.GetOneEdge(ui->cbTo->currentText().toInt())))
+    if (map.FindRouteDFS(map.GetOneEdge(ui->cbFrom->currentText().toInt()), map.GetOneEdge(ui->cbTo->currentText().toInt())))
     {
         if (! map.RouteEmpty())
         {
@@ -352,7 +341,15 @@ void MainWindow::on_pbFindRoute_clicked()
     }
 }
 
-void MainWindow::on_cbFrom_currentTextChanged(const QString &arg1)
+void MainWindow::ReOpen()
 {
-
+    if (dbs.isOpen())
+    {
+        dbs.close();
+    }
+    map.ClearData();
+    countGraphs = 0;
+    file_name_base = GetFileNameBase();
+    ui->leBaseFile->setText(file_name_base);
+    Run();
 }
