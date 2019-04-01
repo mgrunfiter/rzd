@@ -9,7 +9,7 @@ QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
-TARGET = final_task
+TARGET = station_map
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -29,12 +29,15 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     qcustomplot.cpp \
-    logger.cpp
+    logger.cpp \
+    stationmap.cpp
 
 HEADERS += \
         mainwindow.h \
     qcustomplot.h \
     logger.h \
+    stationmap.h \
+    profiler.h \
     defines.h
 
 FORMS += \
