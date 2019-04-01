@@ -47,6 +47,7 @@ private slots:
 
 private:
     void ReOpen();
+    void SetLabel(Edge *Edge, bool IsStart=true);
     Ui::MainWindow *ui;
     bool MessBox(QString message);
     QSqlDatabase dbs;

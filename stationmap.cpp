@@ -7,7 +7,6 @@ StationMap::StationMap()
 
 StationMap::~StationMap()
 {
-    qDebug() << "d-tor StationMap ";
     ClearData();
 }
 
@@ -79,17 +78,12 @@ void StationMap::FindParents()
 
 void StationMap::ClearData()
 {
-    qDebug() << "Clear data";
-    qDebug() << "Edges size = " << Edges.size() << "\tEdges capacity: " << Edges.capacity();
-    qDebug() << "Points size = " << Points.size() << "\tPoints capacity: " << Points.capacity();
     Edges.clear();
     Points.clear();
     Route.clear();
     std::vector<Edge *>().swap(Edges);
     std::vector<Edge *>().swap(Route);
     std::vector<PointOnMap *>().swap(Points);
-    qDebug() << "Edges size = " << Edges.size() << "\tEdges capacity: " << Edges.capacity();
-    qDebug() << "Points size = " << Points.size() << "\tPoints capacity: " << Points.capacity();
 }
 
 /*
@@ -110,11 +104,9 @@ Cначала обрабатываются все вершины, смежные
 5   просмотреть весь список смежных с нею вершин и поместить в очередь все еще не обработанные вершины
 */
 
-bool StationMap::FindRouteBFS(Edge * EdgeStart, Edge * EdgeEnd)
+bool StationMap::FindRouteBFS(Edge *EdgeStart, Edge *EdgeEnd)
 {
-    Profiler pfr("FindRoute W");
-    qDebug() << "EdgeStart ID = " << EdgeStart->id;
-    qDebug() << "EdgeEnd ID = " << EdgeEnd->id;
+    Profiler pfr("FindRoute BFS-algorithm");
     bool Flag = false;
     Route.clear();
     std::vector<Edge *>().swap(Route);
@@ -133,8 +125,6 @@ bool StationMap::FindRouteBFS(Edge * EdgeStart, Edge * EdgeEnd)
         int ind = turn.front();
         turn.pop();
         std::vector<int>::iterator it = std::find(done.begin(), done.end(), ind);
-        qDebug() << *it;
-        qDebug() << (it-done.begin());
         if (it != done.end())
         {
             continue;
@@ -151,6 +141,7 @@ bool StationMap::FindRouteBFS(Edge * EdgeStart, Edge * EdgeEnd)
             }
             int count = 0;
             Edge *curEdge = CurrentEdge;
+            qDebug() << "Found route from " << EdgeStart->id << "to" << EdgeEnd->id;
             for (auto it = tmpRoute.rbegin(); it != tmpRoute.rend(); ++it)
             {
                 Edge *tmpEdge = *it;
@@ -188,7 +179,6 @@ bool StationMap::FindRouteBFS(Edge * EdgeStart, Edge * EdgeEnd)
         }
 
     }
-    qDebug() << "end FindRoute";
     return Flag;
 }
 
@@ -210,11 +200,9 @@ bool StationMap::FindRouteBFS(Edge * EdgeStart, Edge * EdgeEnd)
     5 просмотреть весь список смежных с нею вершин и поместить в стек все еще не обработанные вершины
 */
 
-bool StationMap::FindRouteDFS(Edge * EdgeStart, Edge * EdgeEnd)
+bool StationMap::FindRouteDFS(Edge *EdgeStart, Edge *EdgeEnd)
 {
-    Profiler pfr("FindRoute D");
-    qDebug() << "EdgeStart ID = " << EdgeStart->id;
-    qDebug() << "EdgeEnd ID = " << EdgeEnd->id;   
+    Profiler pfr("FindRoute DFS-algorithm");
 
     bool Flag = false;
     Route.clear();
@@ -234,8 +222,6 @@ bool StationMap::FindRouteDFS(Edge * EdgeStart, Edge * EdgeEnd)
         int ind = turn.top();
         turn.pop();
         std::vector<int>::iterator it = std::find(done.begin(), done.end(), ind);
-        qDebug() << *it;
-        qDebug() << (it-done.begin());
         if (it != done.end())
         {
             continue;
@@ -252,6 +238,7 @@ bool StationMap::FindRouteDFS(Edge * EdgeStart, Edge * EdgeEnd)
             }
             int count = 0;
             Edge *curEdge = CurrentEdge;
+            qDebug() << "Found route from " << EdgeStart->id << "to" << EdgeEnd->id;
             for (auto it = tmpRoute.rbegin(); it != tmpRoute.rend(); ++it)
             {
                 Edge *tmpEdge = *it;
@@ -289,7 +276,6 @@ bool StationMap::FindRouteDFS(Edge * EdgeStart, Edge * EdgeEnd)
         }
 
     }
-    qDebug() << "end FindRoute";
     return Flag;
 }
 

@@ -36,10 +36,7 @@ void messageHandler(QtMsgType type, const QMessageLogContext &context, const QSt
 {
     // Открываем поток записи в файл
     QTextStream out(logFile);
-//    QTextStream outcons(stdout);
-    // Записываем дату записи
     out << QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz ");
-    // По типу определяем, к какому уровню относится сообщение
     switch (type)
     {
         case QtInfoMsg:     out << "INF "; break;
@@ -48,8 +45,6 @@ void messageHandler(QtMsgType type, const QMessageLogContext &context, const QSt
         case QtCriticalMsg: out << "CRT "; break;
         case QtFatalMsg:    out << "FTL "; break;
     }
-    // Записываем в вывод категорию сообщения и само сообщение
     out << context.category << ": " << msg << endl;
-//    outcons << context.category << ": " << msg << endl;
-    out.flush();    // Очищаем буферизированные данные
+    out.flush();
 }

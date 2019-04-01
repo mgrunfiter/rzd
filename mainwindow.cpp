@@ -148,7 +148,6 @@ void MainWindow::PaintMap()
     {
         Profiler prfr("Paints station map");
         QVector<double> x(2), y(2);
-
         int GraphicsCount = ui->widget->plottableCount();
         QProgressDialog *pprd = new QProgressDialog("Очистка графика...", "&Отмена", 0, GraphicsCount);
         pprd->setMinimumDuration(0);
@@ -182,6 +181,7 @@ void MainWindow::PaintMap()
         countGraphs = 0;
         if (! map.EdgesEmpty())
         {
+            currentColor = Qt::darkGray;
             PaintGraph(map.GetEdges());
             currentColor = static_cast<Qt::GlobalColor>(currentColor + 3);
         }
@@ -206,67 +206,12 @@ void MainWindow::PaintGraph(std::vector<Edge *> Edges, int LineWidth, bool all)
         countGraphs++;
     }
     //формируем вид начальной и конечной точек, если это маршрут
-    // TODO
     if (! all)
     {
-        // add the text label at the top:
-        QCPItemText *textLabelStart = new QCPItemText(ui->widget);
-        textLabelStart->setPositionAlignment(Qt::AlignTop|Qt::AlignHCenter);
-//        textLabel->position->setType(QCPItemPosition::ptAxisRectRatio);
-//        textLabel->position->setCoords(0.5, 0); // place position at center/top of axis rect
-        textLabelStart->position->setCoords(static_cast<double>(Edges.back()->start->x), static_cast<double>(Edges.back()->start->y) - 10); // place position at center/top of axis rect
-        textLabelStart->setText("Start: " + QString::number(Edges.back()->id));
-        textLabelStart->setFont(QFont(font().family(), 8)); // make font a bit larger
-        textLabelStart->setPen(QPen(Qt::black)); // show black border around text
-        // add the arrow:
-        QCPItemLine *arrowStart = new QCPItemLine(ui->widget);
-        arrowStart->start->setParentAnchor(textLabelStart->top);
-        arrowStart->end->setCoords(static_cast<double>(Edges.back()->start->x), static_cast<double>(Edges.back()->start->y)); // point to (4, 1.6) in x-y-plot coordinates
-        arrowStart->setHead(QCPLineEnding::esSpikeArrow);
-
-        QCPItemText *textLabelFinish = new QCPItemText(ui->widget);
-        textLabelFinish->setPositionAlignment(Qt::AlignTop|Qt::AlignHCenter);
-//        textLabel->position->setType(QCPItemPosition::ptAxisRectRatio);
-//        textLabel->position->setCoords(0.5, 0); // place position at center/top of axis rect
-        textLabelFinish->position->setCoords(static_cast<double>(Edges.front()->end->x), static_cast<double>(Edges.front()->end->y) + 30); // place position at center/top of axis rect
-        textLabelFinish->setText("Finish: " + QString::number(Edges.front()->id));
-        textLabelFinish->setFont(QFont(font().family(), 8)); // make font a bit larger
-        textLabelFinish->setPen(QPen(Qt::black)); // show black border around text
-        // add the arrow:
-        QCPItemLine *arrowFinish = new QCPItemLine(ui->widget);
-        arrowFinish->start->setParentAnchor(textLabelFinish->bottom);
-        arrowFinish->end->setCoords(static_cast<double>(Edges.front()->end->x), static_cast<double>(Edges.front()->end->y)); // point to (4, 1.6) in x-y-plot coordinates
-        arrowFinish->setHead(QCPLineEnding::esSpikeArrow);
-
-
-
-//        QCPGraph* dwPoints = new QCPGraph(ui->widget->xAxis, ui->widget->yAxis);
-//        if (countRoute == 0)
-//        {
-//            countRoute++;
-//        }
-//        else {
-////            dwPoints->d
-//        }
-//        dwPoints->setAdaptiveSampling(false);
-//        dwPoints->setLineStyle(QCPGraph::lsNone);
-//        dwPoints->setScatterStyle(QCPScatterStyle::ssCircle);
-//        dwPoints->setPen(QPen(QBrush(currentColor), 1));
-//        QVector<double> PointsX;
-//        QVector<double> PointsY;
-//        PointsX.push_back(static_cast<double>(Edges.front()->end->x));
-//        PointsX.push_back(static_cast<double>(Edges.back()->start->x));
-//        PointsY.push_back(static_cast<double>(Edges.front()->end->y));
-//        PointsY.push_back(static_cast<double>(Edges.back()->start->y));
-//        dwPoints->addData(PointsX, PointsY);
-//        PointsX.clear();
-//        PointsY.clear();
-//        QVector<double>().swap(PointsX);
-//        QVector<double>().swap(PointsY);
-//        double xl = ui->widget->xAxis->pixelToCoord(Edges.front()->start->x);
-//        double yl = ui->widget->xAxis->pixelToCoord(Edges.front()->start->y);
-//        QLabel *lStart = new QLabel(this);
-//        lStart->setText("qqqqqqqqqqqqqqqqqqqqqqqqqqqqq");
+        // метка старта
+        SetLabel(Edges.back(), true);
+        // Метка финиша
+        SetLabel(Edges.front(), false);
     }
     ui->widget->replot();
 }
@@ -335,12 +280,11 @@ void MainWindow::closeEvent(QCloseEvent *event)
 MainWindow::~MainWindow()
 {  
     delete ui;
-    qDebug() << "d-tor MainWindow ";
 }
 
 QString MainWindow::GetFileNameBase()
 {
-    QString str = QFileDialog::getOpenFileName(nullptr, "Выберите файл БД:", "ывпиыи", "*.db");
+    QString str = QFileDialog::getOpenFileName(nullptr, "Выберите файл БД:", "", "*.db");
     return str;
 }
 
@@ -356,8 +300,8 @@ void MainWindow::on_leBaseFile_returnPressed()
 
 void MainWindow::on_pbFindRoute_clicked()
 {
-//    if (map.FindRouteBFS(map.GetOneEdge(ui->cbFrom->currentText().toInt()), map.GetOneEdge(ui->cbTo->currentText().toInt())))
-    if (map.FindRouteDFS(map.GetOneEdge(ui->cbFrom->currentText().toInt()), map.GetOneEdge(ui->cbTo->currentText().toInt())))
+    if (map.FindRouteBFS(map.GetOneEdge(ui->cbFrom->currentText().toInt()), map.GetOneEdge(ui->cbTo->currentText().toInt())))
+//    if (map.FindRouteDFS(map.GetOneEdge(ui->cbFrom->currentText().toInt()), map.GetOneEdge(ui->cbTo->currentText().toInt())))
     {
         if (! map.RouteEmpty())
         {
@@ -383,4 +327,40 @@ void MainWindow::ReOpen()
     file_name_base = GetFileNameBase();
     ui->leBaseFile->setText(file_name_base);
     Run();
+}
+
+void MainWindow::SetLabel(Edge *Edge, bool IsStart)
+{
+    double x = 0.0;
+    double y = 0.0;
+    double offset = 0.0;
+    QString LabelText;
+    if (IsStart)
+    {
+        x = static_cast<double>(Edge->start->x);
+        y = static_cast<double>(Edge->start->y);
+        offset = -10;
+        LabelText = "Start: ";
+    }
+    else
+    {
+        x = static_cast<double>(Edge->end->x);
+        y = static_cast<double>(Edge->end->y);
+        offset = 10;
+        LabelText = "Finish: ";
+    }
+    LabelText += QString::number(Edge->id);
+    QCPItemText *PointLabel = new QCPItemText(ui->widget);
+    PointLabel->setPositionAlignment(Qt::AlignTop|Qt::AlignHCenter);
+    PointLabel->position->setCoords(x, y + offset);
+    PointLabel->setText(LabelText);
+    PointLabel->setFont(QFont(font().family(), 8));
+    PointLabel->setPen(QPen(currentColor));
+    QCPItemLine *arrow = new QCPItemLine(ui->widget);
+    if (IsStart)
+        arrow->start->setParentAnchor(PointLabel->top);
+    else
+        arrow->start->setParentAnchor(PointLabel->bottom);
+    arrow->end->setCoords(x, y);
+    arrow->setHead(QCPLineEnding::esSpikeArrow);
 }
